@@ -13,6 +13,11 @@ const authService = new AuthService(authRepository);
 const authController = new AuthController(authService);
 
 router.post("/users/signup", validationCheck, authController.signup);
+router.post(
+  "/petsitters/signup",
+  validationCheck,
+  authController.petsitter_signup
+);
 router.post("/login", authController.login);
 router.post("/logout", authController.logout);
 router.get("/me", authMiddleware, authController.me);

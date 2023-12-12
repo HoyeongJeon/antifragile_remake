@@ -27,6 +27,31 @@ export class AuthController {
       next(error);
     }
   };
+
+  petsitter_signup = async (req, res, next) => {
+    try {
+      // console.log(req.body);
+      const { email, name, career, password, passwordCheck } = req.body;
+      if (password !== passwordCheck) {
+        throw new customError(
+          400,
+          "Bad Request",
+          "비밀번호가 일치하지 않습니다."
+        );
+      }
+      const responseFromService = await this.authService.petsitter_signup(
+        email,
+        name,
+        career,
+        password
+      );
+
+      return res.status(responseFromService.status).json(responseFromService);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   login = async (req, res, next) => {
     try {
       const { email, password } = req.body;
