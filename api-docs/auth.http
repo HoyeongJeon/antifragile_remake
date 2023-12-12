@@ -24,12 +24,21 @@ Content-Type: application/json
 }
 
 
-### 로그인
-POST {{host}}/login
+### 로그인(유저)
+POST {{host}}/users/login
 Content-Type: application/json
 
 {
   "email": "example@example.com",
+  "password": "ExAmple123!"
+}
+
+### 로그인(펫시터)
+POST {{host}}/petsitters/login
+Content-Type: application/json
+
+{
+  "email": "petsitter@example.com",
   "password": "ExAmple123!"
 }
 
