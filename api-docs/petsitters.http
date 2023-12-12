@@ -1,0 +1,5 @@
+@host = http://localhost:3000/petsitters
+
+### 펫시터 조회
+GET {{host}}/ HTTP/1.1
+Content-Type: application/json
