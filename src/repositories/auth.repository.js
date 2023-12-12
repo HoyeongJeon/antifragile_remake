@@ -32,6 +32,15 @@ export class AuthRepository {
     };
   };
 
+  petsitter_findByEmail = async (email) => {
+    const user = await this.prisma.petSitters.findFirst({
+      where: {
+        email
+      }
+    });
+    return user;
+  };
+
   findByEmail = async (email) => {
     const user = await this.prisma.users.findFirst({
       where: {

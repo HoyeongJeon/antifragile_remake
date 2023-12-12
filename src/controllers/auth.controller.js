@@ -73,13 +73,39 @@ export class AuthController {
     }
   };
 
+  petsitter_login = async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+      if (!email || !password) {
+        throw new customError(
+          400,
+          "Bad Request",
+          "아이디 / 비밀번호를 입력해주세요."
+        );
+      }
+
+      const responseFromService = await this.authService.petsitter_login(
+        email,
+        password
+      );
+
+      req.session.loggedIn = true;
+      req.session.loggedInUser = responseFromService.data;
+      return res.status(responseFromService.status).json(responseFromService);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   me = async (req, res, next) => {
     try {
-      return res
-        .status(200)
-        .json(
-          response({ status: 200, message: "", data: req.session.loggedInUser })
-        );
+      return res.status(200).json(
+        response({
+          status: 200,
+          message: "정보조회에 성공했습니다.",
+          data: req.session.loggedInUser
+        })
+      );
     } catch (error) {
       next(error);
     }
