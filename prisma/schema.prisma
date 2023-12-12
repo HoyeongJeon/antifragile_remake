@@ -6,6 +6,67 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Users { 
+  userId Int @id @default(autoincrement()) @map("userId")
+  email String @unique @map("email")
+  name String @map("name")
+  password String? @map("password")
+  social Boolean? @default(false) @map("social")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  Review Review[]
+  Reservation Reservation[]
+
+  @@map("Users")
+}
+
+model PetSitters {
+  petsitterId Int @id @default(autoincrement()) @map("petsitterId")
+  email String @unique @map("email")
+  name String @map("name")
+  career String @map("career") @db.Text
+  profile String @map("profile")
+  password String? @map("password")
+  social Boolean? @default(false) @map("social")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  Review Review[]
+  Reservation Reservation[]
+
+  @@map("PetSitters")
+}
+
+model Review {
+  reviewId Int @id @default(autoincrement()) @map("reviewId")
+  UserId Int @map("userId")
+  PetsitterId Int @map("petsitterId")
+  comment String @map("comment")
+  rating Int @map("rating")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  User Users @relation(fields: [UserId], references: [userId])
+  Petsitter PetSitters @relation(fields: [PetsitterId], references: [petsitterId], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("Review")
+}
+
+model Reservation {
+  reservationId Int @id @default(autoincrement()) @map("reservationId")
+  UserId Int @map("userId")
+  PetsitterId Int @map("petsitterId")
+  reservationDate DateTime @map("reservationDate")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  User Users @relation(fields: [UserId], references: [userId])
+  Petsitter PetSitters @relation(fields: [PetsitterId], references: [petsitterId], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("Reservation")
 }
