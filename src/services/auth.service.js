@@ -27,6 +27,27 @@ export class AuthService {
     });
   };
 
+  petsitter_signup = async (email, career, name, password) => {
+    // const duplicatedId = await this.authRepository.findByEmail(email);
+    // if (duplicatedId) {
+    //   throw new customError(409, "Conflict", "이미 존재하는 아이디입니다.");
+    // }
+
+    const hashedPassword = await bcrypt.hash(password, PASSWORD_HASH_SALT);
+
+    const signUp = await this.authRepository.petsitter_signup(
+      email,
+      career,
+      name,
+      hashedPassword
+    );
+    return response({
+      status: 200,
+      message: "회원가입에 성공했습니다.",
+      data: signUp
+    });
+  };
+
   login = async (email, password) => {
     const duplicatedId = await this.authRepository.findByEmail(email);
     if (!duplicatedId) {

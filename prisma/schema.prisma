@@ -30,7 +30,7 @@ model PetSitters {
   email String @unique @map("email")
   name String @map("name")
   career String @map("career") @db.Text
-  profile String @map("profile")
+  profile String? @map("profile")
   password String? @map("password")
   social Boolean? @default(false) @map("social")
   createdAt DateTime @default(now()) @map("createdAt")

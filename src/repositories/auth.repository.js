@@ -14,7 +14,22 @@ export class AuthRepository {
     return {
       signup
     };
-    // const signup = await this.prisma.users.create({});
+  };
+
+  petsitter_signup = async (email, name, career, password) => {
+    console.log(email, name, career, password);
+    const signup = await this.prisma.petSitters.create({
+      data: {
+        email,
+        name,
+        career,
+        password
+      }
+    });
+    delete signup.password;
+    return {
+      signup
+    };
   };
 
   findByEmail = async (email) => {
