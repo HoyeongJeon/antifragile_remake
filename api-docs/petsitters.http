@@ -3,3 +3,11 @@
 ### 펫시터 조회
 GET {{host}}/ HTTP/1.1
 Content-Type: application/json
+
+### 펫시터 상세 조회
+GET {{host}}/2  HTTP/1.1
+Content-Type: application/json
+
+### 펫시터 검색
+GET {{host}}/search?keyword=강형욱  HTTP/1.1
+Content-Type: application/json
