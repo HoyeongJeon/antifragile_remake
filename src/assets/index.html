@@ -22,6 +22,44 @@
       ul li > a {
         margin: 0px 15px;
       }
+      body {
+        width: 100%;
+        height: 100vh;
+      }
+
+      .sitters-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 200px;
+      }
+
+      .card {
+        margin: 10px;
+      }
+      header {
+        text-align: center;
+        font-family:
+          Slack-Larsseit,
+          Helvetica Neue,
+          Helvetica,
+          Segoe UI,
+          Tahoma,
+          Arial,
+          sans-serif;
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 46px;
+        letter-spacing: -0.75px;
+        margin-top: 50px;
+      }
+      h4 {
+        text-align: center;
+        padding-top: 50px;
+      }
     </style>
   </head>
   <body>
@@ -73,7 +111,53 @@
       </div>
     </nav>
     <!-- html 작성 시작 -->
+    <header>세상에 나쁜 개는 있다.</header>
+    <h4>확실하게 고쳐드립니다.</h4>
+    <div class="sitters-container">
+      <div class="card" style="width: 18rem">
+        <img
+          src="https://image.ytn.co.kr/general/jpg/2023/0221/202302210843310282_d.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <span class="card-text petsitter-name">강형욱</span>
+        </div>
+      </div>
 
+      <div class="card" style="width: 18rem">
+        <img
+          src="https://image.ytn.co.kr/general/jpg/2023/0221/202302210843310282_d.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <span class="card-text petsitter-name">강형욱</span>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem">
+        <img
+          src="https://image.ytn.co.kr/general/jpg/2023/0221/202302210843310282_d.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <span class="card-text petsitter-name">강형욱</span>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem">
+        <img
+          src="https://image.ytn.co.kr/general/jpg/2023/0221/202302210843310282_d.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <span class="card-text petsitter-name">강형욱</span>
+        </div>
+      </div>
+    </div>
     <!-- html 작성 끝 -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -86,6 +170,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <!-- <script src="./js/petsitters/getSitters.js"></script> -->
     <script>
       const isLoggedIn = async () => {
         const jsonData = await (

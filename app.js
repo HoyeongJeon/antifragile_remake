@@ -36,7 +36,8 @@ const sessionStore = new MySQLStore({
 
 app.use(
   cors({
-    origin: "*"
+    origin: true,
+    credentials: true
   })
 );
 
@@ -59,6 +60,7 @@ app.use(
 
 app.use(localsMiddleware);
 
+app.use("/uploads", express.static("uploads"));
 app.use("/", router);
 
 app.use("/", express.static(path.join(__dirname + "/src", "assets")));

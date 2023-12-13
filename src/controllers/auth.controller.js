@@ -33,7 +33,7 @@ export class AuthController {
     try {
       // console.log(req.body);
       const { email, name, career, password, passwordCheck } = req.body;
-
+      const { path } = req.file;
       if (password !== passwordCheck) {
         throw new customError(
           400,
@@ -45,7 +45,8 @@ export class AuthController {
         email,
         name,
         career,
-        password
+        password,
+        path
       );
 
       return res.status(responseFromService.status).json(responseFromService);
