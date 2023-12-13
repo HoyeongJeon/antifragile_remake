@@ -26,6 +26,24 @@ export class PetsittersRepository {
       }
     });
 
+    if (petsitter) {
+      const reviews = petsitter.Review;
+      let totalRating = 0;
+
+      for (let i = 0; i < reviews.length; i++) {
+        totalRating += reviews[i].rating;
+      }
+
+      let avgRating = 0;
+      if (reviews.length > 0) {
+        avgRating = totalRating / reviews.length;
+      }
+
+      petsitter.avgRating = avgRating;
+
+      return petsitter;
+    }
+
     delete petsitter.password;
 
     return petsitter;
@@ -82,5 +100,12 @@ export class PetsittersRepository {
       }
     });
     return updatedReviews;
+  };
+
+  deleteReviews = async (userId, reviewId) => {
+    const deletedReviews = await this.prisma.review.delete({
+      where: { UserId: +userId, reviewId: +reviewId }
+    });
+    return deletedReviews;
   };
 }

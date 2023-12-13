@@ -25,9 +25,10 @@ router.put(
   authMiddleware,
   petsittersController.putReviews
 );
-// router.delete(
-//   "/profile/:petsitterId/review/:reviewId",
-//   authMiddleware,
-//   petsittersController.deleteReviews
-// );
+router.delete(
+  "/profile/:petsitterId/review/:reviewId",
+  authMiddleware,
+  petsittersController.deleteReviews
+);
+
 export default router;
