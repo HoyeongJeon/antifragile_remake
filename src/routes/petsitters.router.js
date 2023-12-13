@@ -15,4 +15,19 @@ router.get("/", petsittersController.getPetsitters);
 router.get("/:petsitterId(d+)", petsittersController.getPetsitterById);
 router.get("/search", petsittersController.searchPetsitters);
 
+router.post(
+  "/profile/:petsitterId/review",
+  authMiddleware,
+  petsittersController.postReviews
+);
+router.put(
+  "/profile/:petsitterId/review/:reviewId",
+  authMiddleware,
+  petsittersController.putReviews
+);
+// router.delete(
+//   "/profile/:petsitterId/review/:reviewId",
+//   authMiddleware,
+//   petsittersController.deleteReviews
+// );
 export default router;

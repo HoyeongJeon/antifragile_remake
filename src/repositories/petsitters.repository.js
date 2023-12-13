@@ -52,4 +52,35 @@ export class PetsittersRepository {
 
     return petsitters;
   };
+
+  postReviews = async (comment, rating, userId, petsitterId) => {
+    const createdReviews = await this.prisma.review.create({
+      data: {
+        UserId: userId,
+        PetsitterId: +petsitterId,
+        comment,
+        rating: +rating
+      }
+    });
+    return createdReviews;
+  };
+
+  getReviews = async (reviewId) => {
+    const gotReviews = await this.prisma.review.findFirst({
+      where: { reviewId: +reviewId }
+    });
+    return gotReviews;
+  };
+  putReviews = async (comment, rating, userId, petsitterId, reviewId) => {
+    const updatedReviews = await this.prisma.review.update({
+      where: { reviewId: +reviewId, UserId: +userId },
+      data: {
+        UserId: +userId,
+        PetsitterId: +petsitterId,
+        comment,
+        rating: +rating
+      }
+    });
+    return updatedReviews;
+  };
 }
