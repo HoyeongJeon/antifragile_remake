@@ -6,6 +6,7 @@ import { AuthService } from "../services/auth.service.js";
 import { AuthController } from "../controllers/auth.controller.js";
 import { prisma } from "../utils/prisma/index.js";
 import { publicOnlyMiddleware } from "../middlewares/public-only.middleware.js";
+import imgUpload from "../middlewares/file-upload.middleware.js";
 
 const router = express.Router();
 
@@ -24,6 +25,7 @@ router.post(
   "/petsitters/signup",
   publicOnlyMiddleware,
   validationCheck,
+  // imgUpload.single("profile"),
   authController.petsitter_signup
 );
 router.post(
@@ -31,7 +33,7 @@ router.post(
   publicOnlyMiddleware,
   authController.petsitter_login
 );
-router.post("/logout", authMiddleware, authController.logout);
+router.get("/logout", authMiddleware, authController.logout);
 router.get("/me", authMiddleware, authController.me);
 // 카카오톡 로그인 만들기
 router.get(
