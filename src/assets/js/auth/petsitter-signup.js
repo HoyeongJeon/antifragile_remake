@@ -62,11 +62,26 @@ signupForm.addEventListener("submit", async (e) => {
     return alert("비밀번호가 일치하지 않습니다.");
   }
 
-  formData.append("email", emailInput.value);
-  formData.append("name", nameInput.value);
-  formData.append("career", careerInput.value);
-  formData.append("password", passwordInput.value);
-  formData.append("passwordCheck", passwordCheckInput.value);
+  if (formData.has("profile")) {
+    console.log(formData.get("profile"));
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*" // CORS 정책을 위한 설정
+      },
+      body: formData
+    };
+    await fetch("http://localhost:3000/auth/petsitters/signup", options).then(
+      (res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error("프로필 사진 등록에 실패했습니다.");
+        }
+      }
+    );
+  }
 
   const data = {
     email: emailInput.value,
@@ -86,7 +101,6 @@ signupForm.addEventListener("submit", async (e) => {
     })
   ).json();
 
-  console.log(jsonData);
   if (jsonData.status === 200) {
     alert(jsonData.message);
     location.href = "petsitter-login.html";

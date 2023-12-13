@@ -27,7 +27,7 @@ export class AuthService {
     });
   };
 
-  petsitter_signup = async (email, career, name, password) => {
+  petsitter_signup = async (email, career, name, password, path) => {
     const duplicatedId = await this.authRepository.petsitter_findByEmail(email);
     if (duplicatedId) {
       throw new customError(409, "Conflict", "이미 존재하는 아이디입니다.");
@@ -39,7 +39,8 @@ export class AuthService {
       email,
       career,
       name,
-      hashedPassword
+      hashedPassword,
+      path
     );
     return response({
       status: 200,

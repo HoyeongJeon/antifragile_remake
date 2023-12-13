@@ -16,14 +16,14 @@ export class AuthRepository {
     };
   };
 
-  petsitter_signup = async (email, name, career, password) => {
-    console.log(email, name, career, password);
+  petsitter_signup = async (email, name, career, password, path) => {
     const signup = await this.prisma.petSitters.create({
       data: {
         email,
         name,
         career,
-        password
+        password,
+        profile: path
       }
     });
     delete signup.password;

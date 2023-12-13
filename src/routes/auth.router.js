@@ -14,6 +14,7 @@ const authRepository = new AuthRepository(prisma);
 const authService = new AuthService(authRepository);
 const authController = new AuthController(authService);
 
+// /auth/petsitters/signup
 router.post(
   "/users/signup",
   publicOnlyMiddleware,
@@ -24,8 +25,7 @@ router.post("/users/login", publicOnlyMiddleware, authController.login);
 router.post(
   "/petsitters/signup",
   publicOnlyMiddleware,
-  validationCheck,
-  // imgUpload.single("profile"),
+  imgUpload.single("profile"),
   authController.petsitter_signup
 );
 router.post(
