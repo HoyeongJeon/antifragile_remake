@@ -80,6 +80,10 @@ export class AuthService {
     const duplicatedId = await this.authRepository.petsitter_findByEmail(email);
     if (!duplicatedId) {
       throw new customError(409, "Conflict", "존재하지 않는 아이디입니다.");
+      // return response({
+      //   status: 409,
+      //   message: "존재하지 않는 아이디입니다."
+      // });
     }
     const isMatch = await bcrypt.compare(password, duplicatedId.password);
     if (!isMatch) {
@@ -103,4 +107,6 @@ export class AuthService {
       data: duplicatedId
     });
   };
+
+  startLoginWithKakaoTalk = async (email, name) => {};
 }

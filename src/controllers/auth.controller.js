@@ -122,4 +122,16 @@ export class AuthController {
       next(error);
     }
   };
+
+  startLoginWithKakaoTalk = async (req, res, next) => {
+    try {
+      const baseUrl = "https://kauth.kakao.com/oauth/authorize";
+
+      const responseFromService =
+        await this.authService.startLoginWithKakaoTalk();
+      return res.status(responseFromService.status).json(responseFromService);
+    } catch (error) {
+      next(error);
+    }
+  };
 }

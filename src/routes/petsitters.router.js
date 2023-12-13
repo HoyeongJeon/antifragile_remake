@@ -12,5 +12,7 @@ const petsittersService = new PetssitersService(petsittersRepository);
 const petsittersController = new PetsittersController(petsittersService);
 
 router.get("/", petsittersController.getPetsitters);
+router.get("/:petsitterId(d+)", petsittersController.getPetsitterById);
+router.get("/search", petsittersController.searchPetsitters);
 
 export default router;

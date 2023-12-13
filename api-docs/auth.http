@@ -16,9 +16,9 @@ POST {{host}}/petsitters/signup HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "petsitter2@example.com",
-  "name": "펫시터 이름",
-  "career": "1년",
+  "email": "petsitter3@example.com",
+  "name": "강형욱",
+  "career": "2년",
   "password": "ExAmple123!",
   "passwordCheck": "ExAmple123!"
 }
@@ -38,7 +38,7 @@ POST {{host}}/petsitters/login
 Content-Type: application/json
 
 {
-  "email": "petsitter@example.com",
+  "email": "petsitter12@example.com",
   "password": "ExAmple123!"
 }
 
