@@ -8,6 +8,7 @@ export class AuthController {
   signup = async (req, res, next) => {
     try {
       const { email, name, password, passwordCheck } = req.body;
+
       if (password !== passwordCheck) {
         throw new customError(
           400,
@@ -32,6 +33,7 @@ export class AuthController {
     try {
       // console.log(req.body);
       const { email, name, career, password, passwordCheck } = req.body;
+
       if (password !== passwordCheck) {
         throw new customError(
           400,

@@ -3,6 +3,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import expressMySQLSession from "express-mysql-session";
+import cors from "cors";
+import path from "path";
 import { SERVER_PORT } from "./src/constants/app.contant";
 import {
   MYSQL_HOST,
@@ -18,6 +20,7 @@ import errorHandlingMiddleware from "./src/middlewares/error-handling.middleware
 import router from "./src/routes/index.js";
 
 const app = express();
+const __dirname = path.resolve();
 const PORT = SERVER_PORT || 3000;
 const MySQLStore = expressMySQLSession(session);
 
@@ -31,8 +34,15 @@ const sessionStore = new MySQLStore({
   createDatabaseTable: true
 });
 
+app.use(
+  cors({
+    origin: "*"
+  })
+);
+
 app.use(logMiddleware);
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(
@@ -50,6 +60,9 @@ app.use(
 app.use(localsMiddleware);
 
 app.use("/", router);
+
+app.use("/", express.static(path.join(__dirname + "/src", "assets")));
+app.use(express.static("assets"));
 
 app.use(errorHandlingMiddleware);
 app.listen(PORT, () => {

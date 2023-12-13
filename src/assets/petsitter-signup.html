@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>걸그룹 데뷔조 | 펫시터 회원가입</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <style>
+      .top-nav-left {
+        margin-left: auto;
+        margin-right: 0;
+      }
+      .top-nav-right {
+        margin-left: 0;
+        margin-right: 100px;
+      }
+      ul li > a {
+        margin: 0px 15px;
+      }
+    </style>
+    <link rel="stylesheet" href="./css/signup.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mb-2 mb-lg-0 top-nav-left">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">펫시터</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reservation.html">예약하기</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+          <ul class="navbar-nav top-nav-right">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="login.html"
+                >로그인</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="signup.html">회원가입</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- html 작성 시작 -->
+
+    <div id="container">
+      <header>펫시터 회원가입</header>
+      <form class="signup-form" enctype="multipart/form-data">
+        <label for="email">
+          <span>이메일 주소</span>
+          <div>
+            <input
+              name="email"
+              class="signup-input"
+              type="email"
+              placeholder="이메일 주소를 입력해주세요."
+              id="email"
+              required
+            />
+          </div>
+        </label>
+        <label for="name">
+          <span>이름</span>
+          <div>
+            <input
+              name="name"
+              class="signup-input"
+              type="string"
+              placeholder="이름을 적어주세요"
+              id="name"
+              required
+            />
+          </div>
+        </label>
+        <label for="career">
+          <span>경력</span>
+          <div>
+            <input
+              name="career"
+              class="signup-input"
+              type="string"
+              placeholder="경력을 적어주세요."
+              id="career"
+            />
+          </div>
+        </label>
+        <label for="profile">
+          <span>프로필 사진</span>
+          <div>
+            <input name="profile" type="file" id="profile" />
+          </div>
+        </label>
+        <label for="password">
+          <span>비밀번호</span>
+          <div>
+            <input
+              name="password"
+              class="signup-input"
+              type="password"
+              id="password"
+              placeholder="비밀번호를 입력해주세요."
+              required
+            />
+          </div>
+        </label>
+        <label for="password-confirm">
+          <span>비밀번호 확인</span>
+          <div>
+            <input
+              name="password-confirm"
+              class="signup-input"
+              type="password"
+              id="password-confirm"
+              placeholder="비밀번호를 다시 입력해주세요."
+              required
+            />
+          </div>
+        </label>
+        <button class="signup-button">회원가입하기</button>
+        <p class="link-container">
+          이미 회원이신가요?&nbsp;
+          <a href="/petsitter-login.html">펫시터 로그인 하러가기</a>
+        </p>
+      </form>
+    </div>
+    <!-- html 작성 끝 -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script type="module" src="./js/auth/petsitter-signup.js"></script>
+    <script>
+      const isLoggedIn = async () => {
+        const jsonData = await (
+          await fetch("http://localhost:3000/auth/me")
+        ).json();
+
+        if (jsonData.status === 200) {
+          window.location.href = "/";
+        }
+      };
+      isLoggedIn();
+    </script>
+  </body>
+</html>
