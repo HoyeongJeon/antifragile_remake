@@ -57,6 +57,9 @@ export class PetssitersService {
     if (!comment || !rating) {
       throw new customError(409, "Conflict", "데이터형식이 올바르지 않습니다.");
     }
+    if (rating > 5) {
+      throw new customError(409, "Conflict", "데이터형식이 올바르지 않습니다.");
+    }
     const createdReviews = await this.petsittersRepository.postReviews(
       userId,
       petsitterId,
@@ -92,12 +95,22 @@ export class PetssitersService {
     });
   };
 
-  // deleteReviews = async (userId, petsitterId, reviewId) => {
-  //   const deletedReviews = await this.petsittersRepository.putReviews(
-  //     userId,
-  //     petsitterId,
-  //     reviewId
-  //   );
-
-  // if (!deletedReviews)
+  deleteReviews = async (userId, reviewId) => {
+    const gotReviews = await this.petsittersRepository.getReviews(reviewId);
+    if (!gotReviews) {
+      throw new customError(409, "Conflict", "존재하지 않는 리뷰입니다.");
+    }
+    const deletedReviews = await this.petsittersRepository.deleteReviews(
+      userId,
+      reviewId
+    );
+    if (!deletedReviews) {
+      throw new customError(409, "Conflict", "존재하지 않는 리뷰입니다.");
+    }
+    return response({
+      success: true,
+      message: "리뷰가 삭제되었습니다.",
+      data: deletedReviews
+    });
+  };
 }

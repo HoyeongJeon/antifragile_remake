@@ -82,19 +82,18 @@ export class PetsittersController {
     }
   };
 
-  // deleteReviews = async (req, res, next) => {
-  //   try {
-  //     const { userId } = req.session.loggedInUser;
-  //     const { petsitterId, reviewId } = req.params;
+  deleteReviews = async (req, res, next) => {
+    try {
+      const { userId } = req.session.loggedInUser;
+      const { reviewId } = req.params;
 
-  //     const deletedReviews = await this.petsittersService.deleteReviews(
-  //       userId,
-  //       petsitterId,
-  //       reviewId
-  //     );
-  //     return res.status(deletedReviews.status).json(deletedReviews);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      const deletedReviews = await this.petsittersService.deleteReviews(
+        userId,
+        reviewId
+      );
+      return res.status(deletedReviews.status).json(deletedReviews);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
