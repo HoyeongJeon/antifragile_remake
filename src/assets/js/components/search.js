@@ -1,9 +1,14 @@
-const getPetSitters = async () => {
-  const jsonData = await (
-    await fetch("http://localhost:3000/petsitters/")
-  ).json();
+const searchInput = document.querySelector("#searchInput");
+const searchBtn = document.querySelector("#searchBtn");
 
-  console.log(jsonData.data);
+const paintPage = async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const keyword = urlParams.get("keyword");
+  if (keyword === null) return;
+  const jsonData = await (
+    await fetch(`http://localhost:3000/petsitters/search?keyword=${keyword}`)
+  ).json();
+  console.log(jsonData);
   if (jsonData.status === 200) {
     const sitters = jsonData.data;
     const sittersContainer = document.querySelector(".sitters-container");
@@ -36,4 +41,16 @@ const getPetSitters = async () => {
     alert(jsonData.message);
   }
 };
-getPetSitters();
+
+paintPage();
+searchBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  console.log("searchBtn clicked");
+  const searchValue = searchInput.value;
+  const jsonData = await (
+    await fetch(
+      `http://localhost:3000/petsitters/search?keyword=${searchValue}`
+    )
+  ).json();
+  window.location.href = `http://localhost:3000/search.html?keyword=${searchValue}`;
+});

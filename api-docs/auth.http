@@ -19,6 +19,7 @@ Content-Type: application/json
   "email": "petsitter5@example.com",
   "name": "강형욱",
   "career": "2년",
+  "tags":"태그1,태그2,태그3",
   "password": "ExAmple123!",
   "passwordCheck": "ExAmple123!"
 }

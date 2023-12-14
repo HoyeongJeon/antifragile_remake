@@ -32,8 +32,10 @@ export class AuthController {
   petsitter_signup = async (req, res, next) => {
     try {
       // console.log(req.body);
-      const { email, name, career, password, passwordCheck } = req.body;
+      const { email, name, career, tags, introduce, password, passwordCheck } =
+        req.body;
       const { path } = req.file;
+      // const path = "";
       if (password !== passwordCheck) {
         throw new customError(
           400,
@@ -45,6 +47,8 @@ export class AuthController {
         email,
         name,
         career,
+        tags,
+        introduce,
         password,
         path
       );
@@ -121,18 +125,6 @@ export class AuthController {
       return res
         .status(200)
         .json(response({ status: 200, message: "로그아웃 됐습니다." }));
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  startLoginWithKakaoTalk = async (req, res, next) => {
-    try {
-      const baseUrl = "https://kauth.kakao.com/oauth/authorize";
-
-      const responseFromService =
-        await this.authService.startLoginWithKakaoTalk();
-      return res.status(responseFromService.status).json(responseFromService);
     } catch (error) {
       next(error);
     }

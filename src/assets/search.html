@@ -86,19 +86,15 @@
               <a class="nav-link" href="reservation.html">예약하기</a>
             </li>
           </ul>
-          <form class="d-flex" role="search" id="searchForm">
+          <form class="d-flex" role="search">
             <input
               class="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-              id="searchInput"
+              id="search"
             />
-            <button
-              class="btn btn-outline-success"
-              type="submit"
-              id="searchBtn"
-            >
+            <button class="btn btn-outline-success" type="submit">
               Search
             </button>
           </form>
@@ -116,14 +112,9 @@
       </div>
     </nav>
     <!-- html 작성 시작 -->
-    <div id="container">
-      <div class="petsitter-info">ㅋㅋㅋ</div>
-      <div class="reservation">
-        <div class="calendar"></div>
-        ㅎㅎㅎㅎ
-      </div>
-      <div class="review">ㅂㅂㅂㅂ</div>
-    </div>
+    <header>세상에 나쁜 개는 있다.</header>
+    <h4>확실하게 고쳐드립니다.</h4>
+    <div class="sitters-container"></div>
     <!-- html 작성 끝 -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -136,8 +127,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-    <script src="./js/petsitters/petsitter-detail.js"></script>
-    <script type="module" src="./js/components/search.js"></script>
+    <script src="./js/components/search.js"></script>
     <script>
       const isLoggedIn = async () => {
         const jsonData = await (
@@ -145,28 +135,16 @@
         ).json();
 
         if (jsonData.status === 200) {
-          const { email, name, role } = jsonData.data;
-          console.log(role);
+          const { email, name } = jsonData.data;
           const topNavRight = document.querySelector(".top-nav-right");
-          if (role === "PETSITTER") {
-            topNavRight.innerHTML = `
+          topNavRight.innerHTML = `
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="petsitter-profile.html">${name}님</a>
+              <a class="nav-link" aria-current="page" href="#">${name}님</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" onClick="logout()" >로그아웃</a>
             </li>
           `;
-          } else {
-            topNavRight.innerHTML = `
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="user-profile.html">${name}님</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" onClick="logout()" >로그아웃</a>
-            </li>
-          `;
-          }
         }
       };
 

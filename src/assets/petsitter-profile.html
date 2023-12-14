@@ -116,14 +116,6 @@
       </div>
     </nav>
     <!-- html 작성 시작 -->
-    <div id="container">
-      <div class="petsitter-info">ㅋㅋㅋ</div>
-      <div class="reservation">
-        <div class="calendar"></div>
-        ㅎㅎㅎㅎ
-      </div>
-      <div class="review">ㅂㅂㅂㅂ</div>
-    </div>
     <!-- html 작성 끝 -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -136,7 +128,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-    <script src="./js/petsitters/petsitter-detail.js"></script>
+    <script src="./js/petsitters/getSitters.js"></script>
     <script type="module" src="./js/components/search.js"></script>
     <script>
       const isLoggedIn = async () => {
@@ -145,28 +137,16 @@
         ).json();
 
         if (jsonData.status === 200) {
-          const { email, name, role } = jsonData.data;
-          console.log(role);
+          const { email, name } = jsonData.data;
           const topNavRight = document.querySelector(".top-nav-right");
-          if (role === "PETSITTER") {
-            topNavRight.innerHTML = `
+          topNavRight.innerHTML = `
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="petsitter-profile.html">${name}님</a>
+              <a class="nav-link" aria-current="page" href="#">${name}님</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" onClick="logout()" >로그아웃</a>
             </li>
           `;
-          } else {
-            topNavRight.innerHTML = `
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="user-profile.html">${name}님</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" onClick="logout()" >로그아웃</a>
-            </li>
-          `;
-          }
         }
       };
 

@@ -27,7 +27,15 @@ export class AuthService {
     });
   };
 
-  petsitter_signup = async (email, career, name, password, path) => {
+  petsitter_signup = async (
+    email,
+    name,
+    career,
+    tags,
+    introduce,
+    password,
+    path
+  ) => {
     const duplicatedId = await this.authRepository.petsitter_findByEmail(email);
     if (duplicatedId) {
       throw new customError(409, "Conflict", "이미 존재하는 아이디입니다.");
@@ -37,8 +45,10 @@ export class AuthService {
 
     const signUp = await this.authRepository.petsitter_signup(
       email,
-      career,
       name,
+      career,
+      tags,
+      introduce,
       hashedPassword,
       path
     );
@@ -108,6 +118,4 @@ export class AuthService {
       data: duplicatedId
     });
   };
-
-  startLoginWithKakaoTalk = async (email, name) => {};
 }
