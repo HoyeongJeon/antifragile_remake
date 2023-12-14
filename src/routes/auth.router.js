@@ -35,11 +35,5 @@ router.post(
 );
 router.get("/logout", authMiddleware, authController.logout);
 router.get("/me", authMiddleware, authController.me);
-// 카카오톡 로그인 만들기
-router.get(
-  "/startLoginWithKakaoTalk",
-  publicOnlyMiddleware,
-  authController.startLoginWithKakaoTalk
-);
 
 export default router;

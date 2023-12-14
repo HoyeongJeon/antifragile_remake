@@ -3,7 +3,20 @@ export class PetsittersRepository {
     this.prisma = prisma;
   }
   getPetsitters = async () => {
-    const petsitters = await this.prisma.petSitters.findMany();
+    const petsitters = await this.prisma.petSitters.findMany({
+      select: {
+        email: true,
+        name: true,
+        Profile: {
+          select: {
+            profile: true,
+            tags: true
+          }
+        }
+      }
+    });
+    console.log("petsitters");
+    console.log(petsitters);
     return petsitters;
   };
 
@@ -54,17 +67,42 @@ export class PetsittersRepository {
       select: {
         email: true,
         name: true,
-        career: true,
-        profile: true,
         Review: {
           select: {
             comment: true,
             rating: true
           }
+        },
+        Profile: {
+          select: {
+            profile: true,
+            tags: true,
+            career: true
+          }
         }
       },
       where: {
-        OR: [{ name: { contains: keyword } }, { career: { contains: keyword } }]
+        OR: [
+          {
+            name: {
+              contains: keyword
+            }
+          },
+          {
+            Profile: {
+              tags: {
+                contains: keyword
+              }
+            }
+          },
+          {
+            Profile: {
+              career: {
+                contains: keyword
+              }
+            }
+          }
+        ]
       }
     });
 
