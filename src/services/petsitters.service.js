@@ -53,11 +53,8 @@ export class PetssitersService {
     });
   };
 
-  postReviews = async (comment, rating, userId, petsitterId) => {
-    if (!comment || !rating) {
-      throw new customError(409, "Conflict", "데이터형식이 올바르지 않습니다.");
-    }
-    if (rating > 5) {
+  postReviews = async (userId, petsitterId, comment, rating) => {
+    if (!comment || !rating || parseInt(rating) < 1 || parseInt(rating) > 5) {
       throw new customError(409, "Conflict", "데이터형식이 올바르지 않습니다.");
     }
     const createdReviews = await this.petsittersRepository.postReviews(
@@ -67,12 +64,11 @@ export class PetssitersService {
       rating
     );
     return response({
-      success: true,
+      status: 200,
       message: "리뷰 작성에 성공했습니다.",
       data: createdReviews
     });
   };
-
   putReviews = async (comment, rating, userId, petsitterId, reviewId) => {
     if (!comment || !rating) {
       throw new customError(409, "Conflict", "데이터형식이 올바르지 않습니다.");
@@ -89,7 +85,7 @@ export class PetssitersService {
       reviewId
     );
     return response({
-      success: true,
+      status: 200,
       message: "리뷰가 수정되었습니다.",
       data: updatedReviews
     });
@@ -108,7 +104,7 @@ export class PetssitersService {
       throw new customError(409, "Conflict", "존재하지 않는 리뷰입니다.");
     }
     return response({
-      success: true,
+      status: 200,
       message: "리뷰가 삭제되었습니다.",
       data: deletedReviews
     });
