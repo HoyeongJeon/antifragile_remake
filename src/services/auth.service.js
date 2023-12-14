@@ -1,4 +1,3 @@
-// import { AuthRepository } from "../repositories/authRepository";
 import response from "../lib/response.js";
 import bcrypt from "bcrypt";
 import { PASSWORD_HASH_SALT } from "../constants/security.constant.js";
@@ -116,6 +115,31 @@ export class AuthService {
       status: 200,
       message: "로그인에 성공했습니다.",
       data: duplicatedId
+    });
+  };
+
+  getMyInfo = async (userId) => {
+    const myInfo = await this.authRepository.getMyInfo(userId);
+    if (!myInfo) {
+      throw new customError(400, "Bad Request", "잘못된 요청입니다.");
+    }
+    return response({
+      status: 200,
+      message: "정보조회에 성공했습니다.",
+      data: myInfo
+    });
+  };
+
+  chargeMoney = async (userId, money) => {
+    console.log(userId, money);
+    const result = await this.authRepository.chargeMoney(userId, money);
+    if (!result) {
+      throw new customError(400, "Bad Request", "잘못된 요청입니다.");
+    }
+    return response({
+      status: 200,
+      message: "충전에 성공했습니다.",
+      data: result
     });
   };
 }

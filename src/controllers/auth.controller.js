@@ -129,4 +129,39 @@ export class AuthController {
       next(error);
     }
   };
+  getMyInfo = async (req, res, next) => {
+    try {
+      const {
+        loggedInUser: { userId }
+      } = req.session;
+      if (!userId) {
+        throw new customError(400, "Bad Request", "잘못된 요청입니다.");
+      }
+      const responseFromService = await this.authService.getMyInfo(userId);
+      return res.status(responseFromService.status).json(responseFromService);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  chargeMoney = async (req, res, next) => {
+    try {
+      const {
+        loggedInUser: { userId }
+      } = req.session;
+      const { money } = req.body;
+      if (!userId || !money) {
+        throw new customError(400, "Bad Request", "잘못된 요청입니다.");
+      }
+      console.log(userId, money);
+      const responseFromService = await this.authService.chargeMoney(
+        userId,
+        money
+      );
+
+      return res.status(responseFromService.status).json(responseFromService);
+    } catch (error) {
+      next(error);
+    }
+  };
 }

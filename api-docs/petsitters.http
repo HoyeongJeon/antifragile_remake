@@ -11,3 +11,13 @@ Content-Type: application/json
 ### 펫시터 검색
 GET {{host}}/search?keyword=이름  HTTP/1.1
 Content-Type: application/json
+
+### 리뷰달기
+
+POST {{host}}/profile/1/review HTTP/1.1
+Content-Type: application/json
+
+{
+    "comment": "저희집 개는 악귀였는데 착해졌어요",
+    "rating": 5
+}
