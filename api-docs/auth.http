@@ -46,5 +46,16 @@ Content-Type: application/json
 ### 내 정보 조회
 GET  {{host}}/me
 
+### 유저 상세 조회
+GET  {{host}}/users
+
 ### 로그아웃
 POST {{host}}/logout
+
+### 돈 충전하기
+POST {{host}}/users/charge
+Content-Type: application/json
+
+{
+  "money": 10000
+} 
