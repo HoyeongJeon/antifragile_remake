@@ -15,6 +15,7 @@ export class PetsittersRepository {
         },
         Review: {
           select: {
+            title: true,
             comment: true,
             rating: true
           }
@@ -53,6 +54,7 @@ export class PetsittersRepository {
         },
         Review: {
           select: {
+            title: true,
             comment: true,
             rating: true
           }
@@ -85,6 +87,7 @@ export class PetsittersRepository {
         name: true,
         Review: {
           select: {
+            title: true,
             comment: true,
             rating: true
           }
@@ -138,11 +141,12 @@ export class PetsittersRepository {
     }
     return petsitters;
   };
-  postReviews = async (userId, petsitterId, comment, rating) => {
+  postReviews = async (userId, petsitterId, title, comment, rating) => {
     const createdReviews = await this.prisma.review.create({
       data: {
         UserId: userId,
         PetsitterId: +petsitterId,
+        title,
         comment,
         rating: +rating
       }
@@ -155,12 +159,20 @@ export class PetsittersRepository {
     });
     return gotReviews;
   };
-  putReviews = async (comment, rating, userId, petsitterId, reviewId) => {
+  putReviews = async (
+    userId,
+    petsitterId,
+    title,
+    comment,
+    rating,
+    reviewId
+  ) => {
     const updatedReviews = await this.prisma.review.update({
       where: { reviewId: +reviewId, UserId: +userId },
       data: {
         UserId: +userId,
         PetsitterId: +petsitterId,
+        title,
         comment,
         rating: +rating
       }
