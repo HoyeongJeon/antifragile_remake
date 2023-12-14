@@ -1,0 +1,26 @@
+@host = http://localhost:3000/reservation
+
+### 펫시터 예약 조회
+GET {{host}}/1 HTTP/1.1
+Content-Type: application/json
+
+### 펫시터 예약 등록
+POST {{host}}/1  HTTP/1.1
+Content-Type: application/json
+
+{
+  "reservationDate":"2023-12-20T00:00:00Z"
+}
+
+### 펫시터 예약 수정
+PUT {{host}}/1/14 HTTP/1.1
+Content-Type: application/json
+
+{
+  "wantToChangeDate":"2023-11-05T00:00:00Z"
+}
+
+### 펫 시터 예약 삭제
+DELETE {{host}}/1/14 HTTP/1.1
+Content-Type: application/json
+
