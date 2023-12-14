@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>걸그룹 데뷔조</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <style>
+      .top-nav-left {
+        margin-left: auto;
+        margin-right: 0;
+      }
+      .top-nav-right {
+        margin-left: 0;
+        margin-right: 100px;
+      }
+      ul li > a {
+        margin: 0px 15px;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+      }
+
+      .sitters-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 200px;
+      }
+
+      .card {
+        margin: 10px;
+      }
+      header {
+        text-align: center;
+        font-family:
+          Slack-Larsseit,
+          Helvetica Neue,
+          Helvetica,
+          Segoe UI,
+          Tahoma,
+          Arial,
+          sans-serif;
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 46px;
+        letter-spacing: -0.75px;
+        margin-top: 50px;
+      }
+      h4 {
+        text-align: center;
+        padding-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mb-2 mb-lg-0 top-nav-left">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">펫시터</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reservation.html">예약하기</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search" id="searchForm">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              id="searchInput"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              id="searchBtn"
+            >
+              Search
+            </button>
+          </form>
+          <ul class="navbar-nav top-nav-right">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="login.html"
+                >로그인</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="signup.html">회원가입</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- html 작성 시작 -->
+    <div id="container">
+      <div class="petsitter-info">ㅋㅋㅋ</div>
+      <div class="reservation">
+        <div class="calendar"></div>
+        ㅎㅎㅎㅎ
+      </div>
+      <div class="review">ㅂㅂㅂㅂ</div>
+    </div>
+    <!-- html 작성 끝 -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script src="./js/petsitters/petsitter-detail.js"></script>
+    <script type="module" src="./js/components/search.js"></script>
+    <script>
+      const isLoggedIn = async () => {
+        const jsonData = await (
+          await fetch("http://localhost:3000/auth/me")
+        ).json();
+
+        if (jsonData.status === 200) {
+          const { email, name, role } = jsonData.data;
+          console.log(role);
+          const topNavRight = document.querySelector(".top-nav-right");
+          if (role === "PETSITTER") {
+            topNavRight.innerHTML = `
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="petsitter-profile.html">${name}님</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" onClick="logout()" >로그아웃</a>
+            </li>
+          `;
+          } else {
+            topNavRight.innerHTML = `
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="user-profile.html">${name}님</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" onClick="logout()" >로그아웃</a>
+            </li>
+          `;
+          }
+        }
+      };
+
+      const logout = async () => {
+        const jsonData = await (
+          await fetch("http://localhost:3000/auth/logout")
+        ).json();
+
+        if (jsonData.status === 200) {
+          alert("로그아웃 되었습니다.");
+          window.location.href = "/";
+        }
+      };
+
+      isLoggedIn();
+    </script>
+  </body>
+</html>

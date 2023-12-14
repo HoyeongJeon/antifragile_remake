@@ -13,10 +13,35 @@ export class PetsittersRepository {
             tags: true
           }
         }
+        Review: {
+          select: {
+            comment: true,
+            rating: true
+          }
+        }
       }
     });
-    console.log("petsitters");
-    console.log(petsitters);
+
+    if (petsitters) {
+      for (let i = 0; i < petsitters.length; i++) {
+        const reviews = petsitters[i].Review || [];
+        let totalRating = 0;
+
+        for (let j = 0; j < reviews.length; j++) {
+          totalRating += reviews[j].rating || 0;
+        }
+
+        let avgRating = 0;
+        if (reviews.length > 0) {
+          avgRating = totalRating / reviews.length;
+        }
+
+        petsitters[i].avgRating = avgRating;
+        delete petsitters[i].Review;
+      }
+    }
+
+
     return petsitters;
   };
 
@@ -105,11 +130,27 @@ export class PetsittersRepository {
         ]
       }
     });
+    if (petsitters) {
+      for (let i = 0; i < petsitters.length; i++) {
+        const reviews = petsitters[i].Review || [];
+        let totalRating = 0;
 
+        for (let j = 0; j < reviews.length; j++) {
+          totalRating += reviews[j].rating || 0;
+        }
+
+        let avgRating = 0;
+        if (reviews.length > 0) {
+          avgRating = totalRating / reviews.length;
+        }
+
+        petsitters[i].avgRating = avgRating;
+        delete petsitters[i].Review;
+      }
+    }
     return petsitters;
   };
-
-  postReviews = async (comment, rating, userId, petsitterId) => {
+  postReviews = async (userId, petsitterId, comment, rating) => {
     const createdReviews = await this.prisma.review.create({
       data: {
         UserId: userId,
