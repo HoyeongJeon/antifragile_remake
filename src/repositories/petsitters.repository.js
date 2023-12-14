@@ -12,7 +12,7 @@ export class PetsittersRepository {
             profile: true,
             tags: true
           }
-        }
+        },
         Review: {
           select: {
             comment: true,
@@ -40,7 +40,6 @@ export class PetsittersRepository {
         delete petsitters[i].Review;
       }
     }
-
 
     return petsitters;
   };
