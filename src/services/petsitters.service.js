@@ -53,13 +53,20 @@ export class PetssitersService {
     });
   };
 
-  postReviews = async (userId, petsitterId, comment, rating) => {
-    if (!comment || !rating || parseInt(rating) < 1 || parseInt(rating) > 5) {
+  postReviews = async (userId, petsitterId, title, comment, rating) => {
+    if (
+      !comment ||
+      !rating ||
+      !title ||
+      parseInt(rating) < 1 ||
+      parseInt(rating) > 5
+    ) {
       throw new customError(409, "Conflict", "데이터형식이 올바르지 않습니다.");
     }
     const createdReviews = await this.petsittersRepository.postReviews(
       userId,
       petsitterId,
+      title,
       comment,
       rating
     );
@@ -69,8 +76,15 @@ export class PetssitersService {
       data: createdReviews
     });
   };
-  putReviews = async (comment, rating, userId, petsitterId, reviewId) => {
-    if (!comment || !rating) {
+  putReviews = async (
+    userId,
+    petsitterId,
+    title,
+    comment,
+    rating,
+    reviewId
+  ) => {
+    if (!title || !comment || !rating) {
       throw new customError(409, "Conflict", "데이터형식이 올바르지 않습니다.");
     }
     const gotReviews = await this.petsittersRepository.getReviews(reviewId);
@@ -80,6 +94,7 @@ export class PetssitersService {
     const updatedReviews = await this.petsittersRepository.putReviews(
       userId,
       petsitterId,
+      title,
       comment,
       rating,
       reviewId
