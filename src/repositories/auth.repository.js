@@ -1,3 +1,5 @@
+import { Prisma } from "@prisma/client";
+
 export class AuthRepository {
   constructor(prisma) {
     this.prisma = prisma;
@@ -16,19 +18,46 @@ export class AuthRepository {
     };
   };
 
-  petsitter_signup = async (email, name, career, password, path) => {
-    const signup = await this.prisma.petSitters.create({
-      data: {
-        email,
-        name,
-        career,
-        password,
-        profile: path
+  petsitter_signup = async (
+    email,
+    name,
+    career,
+    tags,
+    introduce,
+    password,
+    path
+  ) => {
+    const [signup, profile] = await this.prisma.$transaction(
+      async (tx) => {
+        const signup = await tx.petSitters.create({
+          data: {
+            email,
+            name,
+            password
+          }
+        });
+
+        const profile = await tx.profiles.create({
+          data: {
+            profile: path,
+            career,
+            tags,
+            introduce,
+            PetsitterId: signup.petsitterId
+          }
+        });
+
+        return [signup, profile];
+      },
+      {
+        isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted
       }
-    });
+    );
+
     delete signup.password;
     return {
-      signup
+      signup,
+      profile
     };
   };
 

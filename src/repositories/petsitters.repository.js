@@ -7,8 +7,12 @@ export class PetsittersRepository {
       select: {
         email: true,
         name: true,
-        career: true,
-        profile: true,
+        Profile: {
+          select: {
+            profile: true,
+            tags: true
+          }
+        }
         Review: {
           select: {
             comment: true,
@@ -36,6 +40,7 @@ export class PetsittersRepository {
         delete petsitters[i].Review;
       }
     }
+
 
     return petsitters;
   };
@@ -87,17 +92,42 @@ export class PetsittersRepository {
       select: {
         email: true,
         name: true,
-        career: true,
-        profile: true,
         Review: {
           select: {
             comment: true,
             rating: true
           }
+        },
+        Profile: {
+          select: {
+            profile: true,
+            tags: true,
+            career: true
+          }
         }
       },
       where: {
-        OR: [{ name: { contains: keyword } }, { career: { contains: keyword } }]
+        OR: [
+          {
+            name: {
+              contains: keyword
+            }
+          },
+          {
+            Profile: {
+              tags: {
+                contains: keyword
+              }
+            }
+          },
+          {
+            Profile: {
+              career: {
+                contains: keyword
+              }
+            }
+          }
+        ]
       }
     });
     if (petsitters) {

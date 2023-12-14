@@ -122,6 +122,30 @@
             <input name="profile" type="file" id="profile" accept="image/*" />
           </div>
         </label>
+        <label for="tags">
+          <span>태그</span>
+          <div>
+            <input
+              name="tags"
+              class="signup-input"
+              type="string"
+              placeholder="본인을 나타낼 태그를 입력해주세요."
+              id="tags"
+            />
+          </div>
+        </label>
+        <label for="introduce">
+          <span>한줄 소개</span>
+          <div>
+            <input
+              name="introduce"
+              class="signup-input"
+              type="string"
+              placeholder="한줄 소개를 적어주세요."
+              id="introduce"
+            />
+          </div>
+        </label>
         <label for="password">
           <span>비밀번호</span>
           <div>
@@ -188,8 +212,10 @@
       const emailInput = document.querySelector("#email");
       const nameInput = document.querySelector("#name");
       const careerInput = document.querySelector("#career");
+      const introduceInput = document.querySelector("#introduce");
       const passwordInput = document.querySelector("#password");
       const passwordCheckInput = document.querySelector("#password-confirm");
+      const tagsInput = document.querySelector("#tags");
       const profileInput = document.querySelector("#profile");
       const signupForm = document.querySelector(".signup-form");
       const signupButton = document.querySelector(".signup-button");
@@ -214,6 +240,11 @@
           alert("비밀번호를 입력해주세요.");
           return;
         }
+        if (introduceInput.value === "") {
+          alert("한줄 소개를 입력해주세요.");
+          return;
+        }
+
         if (passwordCheckInput.value === "") {
           alert("비밀번호 확인을 입력해주세요.");
           return;
@@ -230,6 +261,8 @@
         formData.append("email", emailInput.value);
         formData.append("name", nameInput.value);
         formData.append("career", careerInput.value);
+        formData.append("tags", tagsInput.value);
+        formData.append("introduce", introduceInput.value);
         formData.append("password", passwordInput.value);
         formData.append("passwordCheck", passwordCheckInput.value);
 
@@ -244,6 +277,8 @@
           formData.delete("email");
           formData.delete("name");
           formData.delete("career");
+          formData.delete("introduce");
+          formData.delete("tags");
           formData.delete("password");
           formData.delete("passwordCheck");
           alert("회원가입이 완료되었습니다.");
