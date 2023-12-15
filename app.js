@@ -1,4 +1,5 @@
 import "dotenv/config";
+import "./src/utils/redis";
 import express from "express";
 import cookieParser from "cookie-parser";
 import session from "express-session";
@@ -18,7 +19,6 @@ import logMiddleware from "./src/middlewares/log.middleware.js";
 import localsMiddleware from "./src/middlewares/locals.middleware.js";
 import errorHandlingMiddleware from "./src/middlewares/error-handling.middleware.js";
 import router from "./src/routes/index.js";
-
 const app = express();
 const __dirname = path.resolve();
 const PORT = SERVER_PORT || 3000;
