@@ -48,8 +48,12 @@ export class PetsittersRepository {
           select: {
             profile: true,
             career: true,
+<<<<<<< HEAD
+            tags: true
+=======
             tags: true,
             introduce: true
+>>>>>>> fbfddf5bc8ac17f6a41636ffa7ab791ae6b15063
           }
         },
         Review: {
