@@ -12,10 +12,15 @@ const reservationService = new ReservationService(reservationRepository);
 const reservationController = new ReservationController(reservationService);
 
 router.get("/:sitterId", reservationController.getReservation);
-router.post("/:sitterId", reservationController.postReservation);
-router.put("/:sitterId/:reservationId", reservationController.putReservation);
+router.post("/", authMiddleware, reservationController.postReservation);
+router.put(
+  "/:sitterId/:reservationId",
+  authMiddleware,
+  reservationController.putReservation
+);
 router.delete(
   "/:sitterId/:reservationId",
+  authMiddleware,
   reservationController.deleteReservation
 );
 export default router;

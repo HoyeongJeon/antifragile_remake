@@ -1,3 +1,6 @@
+import { customError } from "../utils/customError";
+import { Prisma } from "@prisma/client";
+
 export class ReservationRepository {
   constructor(prisma) {
     this.prisma = prisma;
@@ -15,8 +18,16 @@ export class ReservationRepository {
     return reservation;
   };
 
-  postReservation = async (sitterId, reservationDate, userId) => {
+  postReservation = async (sitterId, reservationDate, userId, money) => {
     // sitter id와 날짜 두 개를 db에서 동시에 찾는 방법 구해보기
+    const price = await this.prisma.profiles.findFirst({
+      where: { PetsitterId: +sitterId }
+    });
+
+    if (money < price) {
+      throw new customError(400, "conflict", "돈이 부족합니다.");
+    }
+
     const reservedDate = await this.prisma.reservation.findMany({
       where: { PetsitterId: +sitterId }
     });
@@ -36,13 +47,34 @@ export class ReservationRepository {
     if (result) {
       return false;
     }
-    const reservation = await this.prisma.reservation.create({
-      data: {
-        PetsitterId: +sitterId,
-        UserId: userId,
-        reservationDate
+
+    // const reservation = await this.prisma.reservation.create({
+    //   data: {
+    //     PetsitterId: +sitterId,
+    //     UserId: userId,
+    //     reservationDate
+    //   }
+    // });
+    const [reservation, moneyUpdate] = await this.prisma.$transaction(
+      async (tx) => {
+        const reservation = await this.prisma.reservation.create({
+          data: {
+            PetsitterId: +sitterId,
+            UserId: userId,
+            reservationDate
+          }
+        });
+
+        const moneyUpdate = await tx.users.update({
+          where: { userId: +userId },
+          data: { wallet: money - price.price }
+        });
+        return [reservation, moneyUpdate];
+      },
+      {
+        isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted
       }
-    });
+    );
 
     return reservation;
   };
@@ -127,9 +159,26 @@ export class ReservationRepository {
       return false;
     }
 
-    const deleteReservation = await this.prisma.reservation.delete({
-      where: { reservationId: +reservationId }
+    const price = await this.prisma.profiles.findFirst({
+      where: { PetsitterId: +sitterId }
     });
+
+    const [deleteReservation, moneyUpdate] = await this.prisma.$transaction(
+      async (tx) => {
+        const deleteReservation = await this.prisma.reservation.delete({
+          where: { reservationId: +reservationId }
+        });
+
+        const moneyUpdate = await tx.users.update({
+          where: { userId: +userId },
+          data: { wallet: { increment: price.price } }
+        });
+        return [deleteReservation, moneyUpdate];
+      },
+      {
+        isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted
+      }
+    );
 
     return deleteReservation;
   };

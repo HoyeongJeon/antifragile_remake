@@ -18,15 +18,18 @@ export class ReservationController {
 
   postReservation = async (req, res, next) => {
     try {
-      const { sitterId } = req.params;
-      const { reservationDate } = req.body;
+      const { reservationDate, money, sitterId } = req.body;
 
       const userId = req.session.loggedInUser.userId;
 
+      const formattedReservationDate = new Date(reservationDate);
+
+      console.log(formattedReservationDate);
       const responseFromService = await this.reservationService.postReservation(
         sitterId,
-        reservationDate,
-        userId
+        formattedReservationDate,
+        userId,
+        money
       );
 
       return res.status(responseFromService.status).json(responseFromService);

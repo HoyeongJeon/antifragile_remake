@@ -26,18 +26,50 @@ const paintPage = (email, name, reservationInfo, wallet, Review) => {
     reservationUl.innerHTML += li;
   } else {
     reservationInfo.forEach((reservation) => {
-      const li = `
-      <li class="list-group-item">
-      <span class="reservatedPetsitteName">${
-        reservation.petsitterName
-      } : </span>
-      <span class="reservationDate">${reservation.reservationDate.slice(
-        0,
-        10
-      )}</span>
-    </li>
+      const li = document.createElement("li");
+      li.className = "list-group-item";
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "❌";
+      deleteButton.addEventListener("click", async () => {
+        const deletedReservationId = li.dataset.reservationId;
+        const deletedPetsitterId = li.dataset.PetsitterId;
+        console.log("Deleted Reservation ID:", deletedReservationId);
+        console.log(deletedPetsitterId);
+        // 여기에 삭제 동작을 추가하면 됩니다.
+        const res = await (
+          await fetch(
+            `/reservation/${deletedPetsitterId}/${deletedReservationId}`,
+            {
+              method: "DELETE"
+            }
+          )
+        ).json();
+
+        if (res.status === 200) {
+          alert("예약이 취소되었습니다.");
+          window.location.reload("user-profile.html");
+        } else {
+          alert("예약 취소에 실패했습니다.");
+        }
+      });
+
+      li.innerHTML = `
+        <span class="reservatedPetsitteName">${
+          reservation.petsitterName
+        } : </span>
+        <span class="reservationDate">${reservation.reservationDate.slice(
+          0,
+          10
+        )}</span>
       `;
-      reservationUl.innerHTML += li;
+
+      li.appendChild(deleteButton);
+
+      // reservationId를 li의 dataset에 추가
+      li.dataset.reservationId = reservation.reservationId;
+      li.dataset.PetsitterId = reservation.PetsitterId;
+
+      reservationUl.appendChild(li);
     });
   }
 
