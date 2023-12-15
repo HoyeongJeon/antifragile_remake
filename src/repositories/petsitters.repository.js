@@ -5,12 +5,14 @@ export class PetsittersRepository {
   getPetsitters = async () => {
     const petsitters = await this.prisma.petSitters.findMany({
       select: {
+        petsitterId: true,
         email: true,
         name: true,
         Profile: {
           select: {
             profile: true,
-            tags: true
+            tags: true,
+            price: true
           }
         },
         Review: {

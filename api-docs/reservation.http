@@ -9,7 +9,8 @@ POST {{host}}/1  HTTP/1.1
 Content-Type: application/json
 
 {
-  "reservationDate":"2023-12-21T00:00:00Z"
+  "reservationDate":"2023-12-27T00:00:00Z",
+  "money":"10000"
 }
 
 ### 펫시터 예약 수정

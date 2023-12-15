@@ -88,6 +88,7 @@ export class AuthRepository {
         wallet: true,
         Reservation: {
           select: {
+            reservationId: true,
             PetsitterId: true,
             reservationDate: true
           }
@@ -110,8 +111,7 @@ export class AuthRepository {
         userId: +userId
       }
     });
-    // I Want to send petsitterName to client with myInfo.. How can I do that?
-    // I tried to use include option, but it didn't work.
+
     const reservationInfo = [];
 
     for (let i = 0; i < myInfo.Reservation.length; i++) {
@@ -128,6 +128,15 @@ export class AuthRepository {
         petsitterName: petsitterName.name
       });
     }
+
+    reservationInfo.sort((reservation1, reservation2) => {
+      return (
+        new Date(reservation1.reservationDate) -
+        new Date(reservation2.reservationDate)
+      );
+    });
+
+    console.log(reservationInfo);
     delete myInfo.password;
     delete myInfo.Reservation;
     myInfo.reservationInfo = reservationInfo;

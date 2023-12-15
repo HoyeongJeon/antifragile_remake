@@ -26,12 +26,15 @@ export class ReservationService {
     });
   };
 
-  postReservation = async (sitterId, reservationDate, userId) => {
+  postReservation = async (sitterId, reservationDate, userId, money) => {
     const reservation = await this.reservationRepository.postReservation(
       sitterId,
       reservationDate,
-      userId
+      userId,
+      money
     );
+    const today = new Date();
+    console.log(today);
 
     if (!reservation) {
       throw new customError(400, "conflict", "이미 예약된 날짜입니다.");
