@@ -19,6 +19,7 @@ const getPetSitters = async () => {
     const starRating = generateStarRating(jsonData.data.avgRating);
 
     sitter.innerHTML = `
+    <div onclick="location.href='http://localhost:3000'" style="cursor:pointer">
       <div class="sitter-img">
         <img src="${jsonData.data.Profile.profile}">
       </div>
@@ -29,11 +30,8 @@ const getPetSitters = async () => {
         <p>한 줄 소개 : ${jsonData.data.Profile.introduce}</p>
         <p>평점 : ${starRating}</p>
       </div>
+      </div>
     `;
-
-    sitter.addEventListener("click", () => {
-      window.location.href = "http://localhost:3000";
-    });
 
     container.appendChild(sitter);
   };
