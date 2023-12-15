@@ -44,12 +44,26 @@ export class AuthController {
         passwordCheck
       } = req.body;
       const { path } = req.file;
-      // const path = "";
+      if (password.length < 6) {
+        throw new customError(
+          400,
+          "Bad Request",
+          "비밀번호는 6자리 이상이어야 합니다."
+        );
+      }
       if (password !== passwordCheck) {
         throw new customError(
           400,
           "Bad Request",
           "비밀번호가 일치하지 않습니다."
+        );
+      }
+      const Emailcheck = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+      if (Emailcheck.test(email) === false) {
+        throw new customError(
+          400,
+          "Bad Request",
+          "이메일 형식이 올바르지 않습니다."
         );
       }
       const responseFromService = await this.authService.petsitter_signup(

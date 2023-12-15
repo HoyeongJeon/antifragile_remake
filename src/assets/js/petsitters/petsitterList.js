@@ -19,14 +19,14 @@ const getPetSitters = async () => {
     const starRating = generateStarRating(jsonData.data.avgRating);
 
     sitter.innerHTML = `
-    <div onclick="location.href='http://localhost:3000'" style="cursor:pointer">
+    <div onclick="location.href='http://localhost:3000/petsitter-detail.html?id=${sitterNumber}'" style="cursor:pointer">
       <div class="sitter-img">
         <img src="${jsonData.data.Profile.profile}">
       </div>
       <div class="sitter-info">
         <p>마스터 : ${jsonData.data.name}</p>
         <p>이메일 : ${jsonData.data.email}</p>
-        <p>경력 : ${jsonData.data.Profile.career}년</p>
+        <p>경력 : ${jsonData.data.Profile.career}</p>
         <p>한 줄 소개 : ${jsonData.data.Profile.introduce}</p>
         <p>평점 : ${starRating}</p>
       </div>

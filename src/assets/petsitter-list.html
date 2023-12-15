@@ -30,19 +30,17 @@
         #petsitter-container {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
-            padding-top: 17px;
+            gap: 0px;
         }
 
         .sitter {
-            /* display: flex; */
-            align-items: center;
-            text-align: center;
-            margin: -6px auto;
+            position: relative;
             width: 50%;
-            border: 1px solid rgb(171, 171, 171);
+            margin: 20px auto;
+            border: 1px solid #e5e5e5;
             border-radius: 10px;
-            padding: auto;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .sitter-img {
@@ -50,6 +48,7 @@
             height: 200px;
             overflow: hidden;
             border-radius: 8px 0px 0px 8px;
+            float: left;
         }
 
         .sitter-img img {
@@ -60,14 +59,15 @@
         }
 
         .sitter-info {
-            margin-left: 20px;
-            flex-grow: 1;
-            /* padding-top: 10px; */
-            /* padding-bottom: 100px; */
-            line-height: 1;
+            position: absolute;
+            top: 0;
+            left: 200px;
+            padding: 10px;
+            text-align: center;
+            left: 50%;
         }
 
-        header {
+        */ header {
             text-align: center;
             font-family:
                 Slack-Larsseit,
