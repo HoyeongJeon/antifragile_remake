@@ -49,8 +49,13 @@ export class PetsittersRepository {
       select: {
         email: true,
         name: true,
-        career: true,
-        profile: true,
+        Profile: {
+          select: {
+            profile: true,
+            career: true,
+            tags: true
+          }
+        },
         Review: {
           select: {
             comment: true,
