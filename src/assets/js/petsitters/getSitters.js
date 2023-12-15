@@ -10,6 +10,7 @@ const getPetSitters = async () => {
     sittersContainer.innerHTML = "";
 
     sitters.forEach((sitter) => {
+      console.log(sitter);
       const sitterCard = document.createElement("div");
       sitterCard.classList.add("sitter-card");
       sitterCard.innerHTML = `
