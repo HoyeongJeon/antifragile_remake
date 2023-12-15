@@ -15,16 +15,64 @@
         margin-left: auto;
         margin-right: 0;
       }
+
       .top-nav-right {
         margin-left: 0;
         margin-right: 100px;
       }
+
       ul li > a {
         margin: 0px 15px;
+      }
+      .emailVerificationBtn {
+        background-image: linear-gradient(#f7f8fa, #e7e9ec);
+        border-color: #adb1b8 #a2a6ac #8d9096;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 3px;
+        box-shadow: rgba(255, 255, 255, 0.6) 0 1px 0 inset;
+        box-sizing: border-box;
+        color: #0f1111;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Amazon Ember", Arial, sans-serif;
+        font-size: 14px;
+        height: 29px;
+        font-size: 13px;
+        outline: 0;
+        overflow: hidden;
+        padding: 0 11px;
+        text-align: center;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        margin-bottom: 10px;
+      }
+
+      .emailVerificationBtn:active {
+        border-bottom-color: #a2a6ac;
+      }
+
+      .emailVerificationBtn:active:hover {
+        border-bottom-color: #a2a6ac;
+      }
+
+      .emailVerificationBtn:hover {
+        border-color: #a2a6ac #979aa1 #82858a;
+      }
+
+      .zd:focus {
+        border-color: #e77600;
+        box-shadow: rgba(228, 121, 17, 0.5) 0 0 3px 2px;
+        outline: 0;
       }
     </style>
     <link rel="stylesheet" href="./css/signup.css" />
   </head>
+
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
@@ -43,7 +91,9 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mb-2 mb-lg-0 top-nav-left">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">펫시터</a>
+              <a class="nav-link" aria-current="page" href="petsitter-list.html"
+                >펫시터</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="reservation.html">예약하기</a>
@@ -91,6 +141,9 @@
             />
           </div>
         </label>
+
+        <button class="emailVerificationBtn unclicked">이메일 인증하기</button>
+        <div class="emailVericiationWrapper"></div>
         <label for="name">
           <span>이름</span>
           <div>

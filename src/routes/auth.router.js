@@ -28,6 +28,7 @@ router.post(
   imgUpload.single("profile"),
   authController.petsitter_signup
 );
+
 router.post(
   "/petsitters/login",
   publicOnlyMiddleware,
@@ -35,5 +36,8 @@ router.post(
 );
 router.get("/logout", authMiddleware, authController.logout);
 router.get("/me", authMiddleware, authController.me);
-
+router.get("/users", authMiddleware, authController.getMyInfo);
+// 돈 충전하는 라우터
+router.post("/users/charge", authMiddleware, authController.chargeMoney);
+router.get("/email-auth", authController.emailCheck);
 export default router;

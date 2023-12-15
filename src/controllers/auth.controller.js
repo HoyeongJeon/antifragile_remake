@@ -7,7 +7,7 @@ export class AuthController {
   }
   signup = async (req, res, next) => {
     try {
-      const { email, name, password, passwordCheck } = req.body;
+      const { email, name, password, passwordCheck, auth } = req.body;
 
       if (password !== passwordCheck) {
         throw new customError(
@@ -20,7 +20,8 @@ export class AuthController {
       const responseFromService = await this.authService.signup(
         email,
         name,
-        password
+        password,
+        auth
       );
 
       return res.status(responseFromService.status).json(responseFromService);
@@ -32,8 +33,16 @@ export class AuthController {
   petsitter_signup = async (req, res, next) => {
     try {
       // console.log(req.body);
-      const { email, name, career, tags, introduce, password, passwordCheck } =
-        req.body;
+      const {
+        email,
+        name,
+        career,
+        tags,
+        auth,
+        introduce,
+        password,
+        passwordCheck
+      } = req.body;
       const { path } = req.file;
       // const path = "";
       if (password !== passwordCheck) {
@@ -48,6 +57,7 @@ export class AuthController {
         name,
         career,
         tags,
+        auth,
         introduce,
         password,
         path
@@ -125,6 +135,55 @@ export class AuthController {
       return res
         .status(200)
         .json(response({ status: 200, message: "로그아웃 됐습니다." }));
+    } catch (error) {
+      next(error);
+    }
+  };
+  getMyInfo = async (req, res, next) => {
+    try {
+      const {
+        loggedInUser: { userId }
+      } = req.session;
+      if (!userId) {
+        throw new customError(400, "Bad Request", "잘못된 요청입니다.");
+      }
+      const responseFromService = await this.authService.getMyInfo(userId);
+      return res.status(responseFromService.status).json(responseFromService);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  chargeMoney = async (req, res, next) => {
+    try {
+      const {
+        loggedInUser: { userId }
+      } = req.session;
+      const { money } = req.body;
+      if (!userId || !money) {
+        throw new customError(400, "Bad Request", "잘못된 요청입니다.");
+      }
+      console.log(userId, money);
+      const responseFromService = await this.authService.chargeMoney(
+        userId,
+        money
+      );
+
+      return res.status(responseFromService.status).json(responseFromService);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  emailCheck = async (req, res, next) => {
+    try {
+      const { email } = req.query;
+      if (!email) {
+        throw new customError(400, "Bad Request", "잘못된 요청입니다.");
+      }
+      const responseFromService = await this.authService.emailCheck(email);
+
+      return res.status(responseFromService.status).json(responseFromService);
     } catch (error) {
       next(error);
     }

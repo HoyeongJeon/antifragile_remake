@@ -48,11 +48,12 @@ export class PetsittersController {
     try {
       const { userId } = req.session.loggedInUser;
       const { petsitterId } = req.params;
-      const { comment, rating } = req.body;
+      const { title, comment, rating } = req.body;
 
       const createdReviews = await this.petsittersService.postReviews(
         userId,
         petsitterId,
+        title,
         comment,
         rating
       );
@@ -67,11 +68,12 @@ export class PetsittersController {
     try {
       const { userId } = req.session.loggedInUser;
       const { petsitterId, reviewId } = req.params;
-      const { comment, rating } = req.body;
+      const { title, comment, rating } = req.body;
 
       const updatedReviews = await this.petsittersService.putReviews(
         userId,
         petsitterId,
+        title,
         comment,
         rating,
         reviewId

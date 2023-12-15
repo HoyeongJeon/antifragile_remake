@@ -68,6 +68,7 @@ model Review {
   reviewId Int @id @default(autoincrement()) @map("reviewId")
   UserId Int @map("userId")
   PetsitterId Int @map("petsitterId")
+  title String @map("title")
   comment String @map("comment")
   rating Int @map("rating")
   createdAt DateTime @default(now()) @map("createdAt")

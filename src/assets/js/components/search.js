@@ -8,7 +8,6 @@ const paintPage = async () => {
   const jsonData = await (
     await fetch(`http://localhost:3000/petsitters/search?keyword=${keyword}`)
   ).json();
-  console.log(jsonData);
   if (jsonData.status === 200) {
     const sitters = jsonData.data;
     const sittersContainer = document.querySelector(".sitters-container");
