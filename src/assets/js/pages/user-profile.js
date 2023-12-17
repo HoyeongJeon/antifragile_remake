@@ -15,14 +15,8 @@ const paintPage = (email, name, reservationInfo, wallet, Review) => {
   userName.innerText = name;
   walletInput.innerText = wallet;
 
-  console.log("리뷰", Review);
-
   if (reservationInfo.length === 0) {
     const li = `
-    <li class="list-group-item">
-    <span class="reservatedPetsitteName">예약 내역이 없습니다.</span>
-  </li>`;
-    reservatedPetsitteName.innerText = `
     <li class="list-group-item">
     <span class="reservatedPetsitteName">예약 내역이 없습니다.</span>
   </li>`;
@@ -100,12 +94,15 @@ const paintPage = (email, name, reservationInfo, wallet, Review) => {
       reservationUl.appendChild(li);
     });
   }
+  console.log("리뷰", Review);
 
+  console.log(Review.length);
   if (Review.length === 0) {
     const noReview = `<h6>작성 된 리뷰가 존재하지 않습니다.</h6>`;
     reviewWrapper.innerHTML += noReview;
   } else {
     Review.forEach((review) => {
+      console.log(review);
       const yesReview = `
       <div class="card review-card">
       <div class="card-header">
@@ -165,9 +162,9 @@ submitBtn.addEventListener("click", async () => {
     )
   ).json();
 
-  console.log("제목:", postTitle);
-  console.log("내용:", postComment);
-  console.log("별점:", postReview);
+  // console.log("제목:", postTitle);
+  // console.log("내용:", postComment);
+  // console.log("별점:", postReview);
 
   modal.style.display = "none";
   window.location.reload();
@@ -180,7 +177,6 @@ const getUserInfo = async () => {
   const resposne = await (await fetch(`/auth/users`)).json();
 
   const { email, name, reservationInfo, wallet, Review } = resposne.data;
-  console.log(resposne.data);
   paintPage(email, name, reservationInfo, wallet, Review);
 };
 
