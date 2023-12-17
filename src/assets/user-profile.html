@@ -148,13 +148,20 @@
         border: none;
         background-color: white;
       }
+      #logo {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+      }
     </style>
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Navbar</a>
+        <a class="navbar-brand" href="index.html">
+          <img src="./css/2.png" id="logo" />
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -334,10 +341,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-    <script type="module" src="./js/components/search.js"></script>
     <script src="./js/pages/user-profile.js"></script>
     <script src="./js/components/chargeMoeny.js"></script>
-
+    <script type="module" src="./js/components/search.js"></script>
     <script>
       const isLoggedIn = async () => {
         const jsonData = await (

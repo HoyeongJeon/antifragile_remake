@@ -9,7 +9,7 @@ GET {{host}}/1 HTTP/1.1
 Content-Type: application/json
 
 ### 펫시터 검색
-GET {{host}}/search?keyword=이름  HTTP/1.1
+GET {{host}}/search?keyword=행동  HTTP/1.1
 Content-Type: application/json
 
 ### 리뷰달기
