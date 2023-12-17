@@ -14,7 +14,6 @@ const getPetSitters = async () => {
   const jsonData = await (
     await fetch(`http://localhost:3000/petsitters/${sitterId}`)
   ).json();
-
   const sitter = jsonData.data;
 
   const sitterInfoDiv = document.createElement("div");
@@ -29,10 +28,11 @@ const getPetSitters = async () => {
         alt="..."
         style="height: 430px"
       />
-        <h3 class="sitter-name"> ${sitter.name}</h3>
-        <p class="sitter-email">${sitter.email}</p>
-        <p class="sitter-career">${sitter.Profile.career}</p>
-        <p class="sitter-avgRating"> ${"⭐".repeat(
+        <h3 class="sitter-name">마스터 : ${sitter.name}</h3>
+        <p class="sitter-email">이메일 : ${sitter.email}</p>
+        <p class="sitter-career">경력 : ${sitter.Profile.career}</p>
+        <p class="sitter-introduce">한 줄 소개 : ${sitter.Profile.introduce}</p>
+        <p class="sitter-avgRating">평점 : ${"⭐".repeat(
           Math.floor(sitter.avgRating)
         )}</p>
         </div>
@@ -83,7 +83,6 @@ const getReviews = async () => {
   const jsonData = await (
     await fetch(`http://localhost:3000/petsitters/${sitterId}`)
   ).json();
-
   const review = jsonData.data.Review;
 
   review.forEach((el) => {
@@ -93,7 +92,7 @@ const getReviews = async () => {
     console.log("el.title", el.title);
     reservationDiv.innerHTML = `
           <div class="review-info">
-
+          <p class="sitter-title">${el.title}</p>
           <p class="sitter-rating">${el.comment}</p>
           <p class="sitter-review">${"⭐".repeat(el.rating)}</p>
 
