@@ -62,16 +62,18 @@ const getReservation = async () => {
       }
     });
   });
-
+  console.log("hi");
   //현재 날짜 이전 날짜에는 달력에 색 표시
   $calendarDateCol.forEach((v) => {
     const todayWithTime = new Date();
-    const today = todayWithTime
+    const today = String(todayWithTime)
       .split("")
       .slice(8, 10)
       .reduce((prev, curr) => prev + curr, "");
-
-    if (+v.innerHTML <= +today) {
+    console.log("here");
+    console.log("today", today);
+    console.log("v.innerHTML", v.innerHTML === "");
+    if (+v.innerHTML < +today && v.innerHTML) {
       v.style.backgroundColor = "ff8585";
     }
   });
