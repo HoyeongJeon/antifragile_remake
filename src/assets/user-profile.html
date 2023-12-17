@@ -1,187 +1,349 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>걸그룹 데뷔조</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/be50c7a0af.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./css/user-profile.css" />
+    <style>
+      .top-nav-left {
+        margin-left: auto;
+        margin-right: 0;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>걸그룹 데뷔조</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-  <script src="https://kit.fontawesome.com/be50c7a0af.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./css/user-profile.css" />
-  <style>
-    .top-nav-left {
-      margin-left: auto;
-      margin-right: 0;
-    }
+      .top-nav-right {
+        margin-left: 0;
+        margin-right: 100px;
+      }
 
-    .top-nav-right {
-      margin-left: 0;
-      margin-right: 100px;
-    }
+      ul li > a {
+        margin: 0px 15px;
+      }
 
-    ul li>a {
-      margin: 0px 15px;
-    }
+      body {
+        width: 100%;
+        height: 100vh;
+      }
 
-    body {
-      width: 100%;
-      height: 100vh;
-    }
+      .card {
+        margin: 10px;
+        width: 400px;
+      }
 
-    .card {
-      margin: 10px;
-      width: 400px;
-    }
+      .review-card p {
+        font-size: 18px;
+      }
 
-    .review-card p {
-      font-size: 18px;
-    }
+      .review-card footer {
+        font-size: 13px;
+      }
 
-    .review-card footer {
-      font-size: 13px;
-    }
+      header {
+        text-align: center;
+        font-family:
+          Slack-Larsseit,
+          Helvetica Neue,
+          Helvetica,
+          Segoe UI,
+          Tahoma,
+          Arial,
+          sans-serif;
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 46px;
+        letter-spacing: -0.75px;
+        margin-top: 50px;
+      }
 
-    header {
-      text-align: center;
-      font-family:
-        Slack-Larsseit,
-        Helvetica Neue,
-        Helvetica,
-        Segoe UI,
-        Tahoma,
-        Arial,
-        sans-serif;
-      font-weight: 700;
-      font-size: 48px;
-      line-height: 46px;
-      letter-spacing: -0.75px;
-      margin-top: 50px;
-    }
+      h4 {
+        text-align: center;
+        padding-top: 50px;
+      }
+      /* 모달 스타일 */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
 
-    h4 {
-      text-align: center;
-      padding-top: 50px;
-    }
-  </style>
-</head>
+      .modal-content {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 400px;
+        width: 100%;
+        box-sizing: border-box;
+      }
 
-<body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mb-2 mb-lg-0 top-nav-left">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="petsitter-list.html">펫시터</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="reservation.html">예약하기</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search" id="searchForm">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" />
-          <button class="btn btn-outline-success" type="submit" id="searchBtn">
-            Search
-          </button>
-        </form>
-        <ul class="navbar-nav top-nav-right">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="login.html">로그인</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="signup.html">회원가입</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!-- html 작성 시작 -->
-  <div>
-    <header class="userName"></header>
-    <!-- Button trigger modal -->
+      /* 모달 내부의 레이블과 입력 필드 스타일 */
+      .modal-content label {
+        display: block;
+        margin-bottom: 5px;
+      }
 
-    <h4>
-      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class="fa-solid fa-wallet"></i>
-      </button>
-      <span class="wallet"></span>
-    </h4>
-    <div class="wrapper">
-      <div class="reservation-wrapper">
-        <h6 style="text-align: center">예약 목록</h6>
-        <div class="card" style="width: 20rem">
-          <ul class="list-group list-group-flush reservationUl"></ul>
-        </div>
-      </div>
+      .modal-content input,
+      .modal-content textarea {
+        width: calc(100% - 16px);
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+      }
 
-      <div>
-        <hr />
-      </div>
+      /* 모달 내부의 버튼 스타일 */
+      .modal-content button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border: none;
+        color: #fff;
+        border-radius: 4px;
+      }
 
-      <h6 style="text-align: center">리뷰 목록</h6>
-      <div class="reviewWrapper"></div>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/xFecKjDPgKA?si=6zndg_69FvAMzxrm"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
-    </div>
-  </div>
+      /* 제출 버튼의 배경색과 hover 효과 */
+      #submitBtn {
+        background-color: #333;
+      }
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
-            요금 충전하기
-          </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form class="moneyChargeForm">
-            <label for="money"></label>
-            <input type="text" placeholder="충전할 요금을 입력해주세요" name="money" id="money" required />
+      #submitBtn:hover {
+        background-color: #555;
+      }
+
+      /* 닫기 버튼의 배경색과 hover 효과 */
+      #closeModalBtn {
+        background-color: #333;
+      }
+
+      #closeModalBtn:hover {
+        background-color: #555;
+      }
+
+      /* 버튼 영역 스타일 */
+      #openModalBtn {
+        margin-bottom: 20px;
+      }
+
+      /* 버튼 그룹 스타일 */
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mb-2 mb-lg-0 top-nav-left">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="petsitter-list.html"
+                >펫시터</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reservation.html">예약하기</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search" id="searchForm">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              id="searchInput"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="submit"
+              id="searchBtn"
+            >
+              Search
+            </button>
           </form>
+          <ul class="navbar-nav top-nav-right">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="login.html"
+                >로그인</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="signup.html">회원가입</a>
+            </li>
+          </ul>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            닫기
-          </button>
-          <button type="button" class="btn btn-primary moneyChargeBtn">
-            충전하기
-          </button>
+      </div>
+    </nav>
+    <!-- html 작성 시작 -->
+    <div>
+      <header class="userName"></header>
+      <!-- Button trigger modal -->
+
+      <h4>
+        <button
+          type="button"
+          class="btn"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          <i class="fa-solid fa-wallet"></i>
+        </button>
+        <span class="wallet"></span>
+      </h4>
+      <div class="wrapper">
+        <div class="reservation-wrapper">
+          <h6 style="text-align: center"></h6>
+          <div class="card" style="width: 20rem">
+            <ul class="list-group list-group-flush reservationUl"></ul>
+          </div>
+        </div>
+
+        <div>
+          <hr />
+        </div>
+
+        <div class="modal-wrapper">
+          <!-- 모달 영역 -->
+          <div id="myModal" class="modal">
+            <div class="modal-content">
+              <label for="postTitle">제목:</label>
+              <input type="text" id="postTitle" placeholder="제목" />
+
+              <label for="postComment">내용:</label>
+              <textarea id="postComment" placeholder="내용"></textarea>
+
+              <label for="postReview" id="postReviewLabel">별점:⭐⭐⭐</label>
+              <input
+                type="range"
+                id="postReview"
+                min="0"
+                max="5"
+                value="3"
+                placeholder="별점"
+              />
+
+              <button id="submitBtn">제출</button>
+              <button id="closeModalBtn">닫기</button>
+            </div>
+          </div>
+        </div>
+        <h6 style="text-align: center">리뷰 목록</h6>
+        <div class="reviewWrapper"></div>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/xFecKjDPgKA?si=6zndg_69FvAMzxrm"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              요금 충전하기
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form class="moneyChargeForm">
+              <label for="money"></label>
+              <input
+                type="text"
+                placeholder="충전할 요금을 입력해주세요"
+                name="money"
+                id="money"
+                required
+              />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              닫기
+            </button>
+            <button type="button" class="btn btn-primary moneyChargeBtn">
+              충전하기
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- html 작성 끝 -->
+    <!-- html 작성 끝 -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
-    crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-  <script type="module" src="./js/components/search.js"></script>
-  <script src="./js/pages/user-profile.js"></script>
-  <script src="./js/components/chargeMoeny.js"></script>
-  <script>
-    const isLoggedIn = async () => {
-      const jsonData = await (
-        await fetch("http://localhost:3000/auth/me")
-      ).json();
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script type="module" src="./js/components/search.js"></script>
+    <script src="./js/pages/user-profile.js"></script>
+    <script src="./js/components/chargeMoeny.js"></script>
+    <script>
+      const isLoggedIn = async () => {
+        const jsonData = await (
+          await fetch("http://localhost:3000/auth/me")
+        ).json();
 
-      if (jsonData.status === 200) {
-        const { email, name, role } = jsonData.data;
-        const topNavRight = document.querySelector(".top-nav-right");
-        if (role === "PETSITTER") {
-          topNavRight.innerHTML = `
+        if (jsonData.status === 200) {
+          const { email, name, role } = jsonData.data;
+          const topNavRight = document.querySelector(".top-nav-right");
+          if (role === "PETSITTER") {
+            topNavRight.innerHTML = `
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="petsitter-profile.html">${name}님</a>
             </li>
@@ -189,8 +351,8 @@
               <a class="nav-link" onClick="logout()" >로그아웃</a>
             </li>
           `;
-        } else {
-          topNavRight.innerHTML = `
+          } else {
+            topNavRight.innerHTML = `
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="user-profile.html">${name}님</a>
             </li>
@@ -198,23 +360,22 @@
               <a class="nav-link" onClick="logout()" >로그아웃</a>
             </li>
           `;
+          }
         }
-      }
-    };
+      };
 
-    const logout = async () => {
-      const jsonData = await (
-        await fetch("http://localhost:3000/auth/logout")
-      ).json();
+      const logout = async () => {
+        const jsonData = await (
+          await fetch("http://localhost:3000/auth/logout")
+        ).json();
 
-      if (jsonData.status === 200) {
-        alert("로그아웃 되었습니다.");
-        window.location.href = "/";
-      }
-    };
+        if (jsonData.status === 200) {
+          alert("로그아웃 되었습니다.");
+          window.location.href = "/";
+        }
+      };
 
-    isLoggedIn();
-  </script>
-</body>
-
+      isLoggedIn();
+    </script>
+  </body>
 </html>

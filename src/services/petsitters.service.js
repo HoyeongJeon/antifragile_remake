@@ -53,6 +53,26 @@ export class PetssitersService {
     });
   };
 
+  getReviews = async (petsitterId) => {
+    console.log("1", petsitterId);
+    const getReview =
+      await this.petsittersRepository.getAllReviews(petsitterId);
+    console.log(getReview);
+    if (!getReview) {
+      throw new customError(
+        404,
+        "Conflict",
+        "펫시터에 해당하는 리뷰가 존재하지 않습니다."
+      );
+    }
+
+    return response({
+      status: 200,
+      message: "리뷰 검색을 성공했습니다.",
+      data: getReview
+    });
+  };
+
   postReviews = async (userId, petsitterId, title, comment, rating) => {
     if (
       !comment ||

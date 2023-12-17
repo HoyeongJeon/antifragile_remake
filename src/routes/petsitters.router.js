@@ -15,6 +15,7 @@ router.get("/", petsittersController.getPetsitters);
 router.get("/search", petsittersController.searchPetsitters);
 router.get("/:petsitterId", petsittersController.getPetsitterById);
 
+router.get("/profile/:petsitterId/review", petsittersController.getReviews);
 router.post(
   "/profile/:petsitterId/review",
   authMiddleware,
