@@ -69,86 +69,6 @@
         text-align: center;
         padding-top: 50px;
       }
-<<<<<<< Updated upstream
-      /* 모달 스타일 */
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-content {
-        background-color: #f5f5f5;
-        padding: 20px;
-        border-radius: 8px;
-        max-width: 400px;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      /* 모달 내부의 레이블과 입력 필드 스타일 */
-      .modal-content label {
-        display: block;
-        margin-bottom: 5px;
-      }
-
-      .modal-content input,
-      .modal-content textarea {
-        width: calc(100% - 16px);
-        padding: 10px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
-      }
-
-      /* 모달 내부의 버튼 스타일 */
-      .modal-content button {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        cursor: pointer;
-        border: none;
-        color: #fff;
-        border-radius: 4px;
-      }
-
-      /* 제출 버튼의 배경색과 hover 효과 */
-      #submitBtn {
-        background-color: #333;
-      }
-
-      #submitBtn:hover {
-        background-color: #555;
-      }
-
-      /* 닫기 버튼의 배경색과 hover 효과 */
-      #closeModalBtn {
-        background-color: #333;
-      }
-
-      #closeModalBtn:hover {
-        background-color: #555;
-      }
-
-      /* 버튼 영역 스타일 */
-      #openModalBtn {
-        margin-bottom: 20px;
-      }
-
-      /* 버튼 그룹 스타일 */
-      .button-group {
-        display: flex;
-        justify-content: space-between;
-      }
-    </style>
-  </head>
-
-=======
 
       .list-group-item button {
         border: none;
@@ -157,7 +77,6 @@
     </style>
   </head>
 
->>>>>>> Stashed changes
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
@@ -231,11 +150,7 @@
       </h4>
       <div class="wrapper">
         <div class="reservation-wrapper">
-<<<<<<< Updated upstream
-          <h6 style="text-align: center"></h6>
-=======
           <h6 style="text-align: center">예약 목록</h6>
->>>>>>> Stashed changes
           <div class="card" style="width: 20rem">
             <ul class="list-group list-group-flush reservationUl"></ul>
           </div>
@@ -245,7 +160,6 @@
           <hr />
         </div>
 
-<<<<<<< Updated upstream
         <div class="modal-wrapper">
           <!-- 모달 영역 -->
           <div id="myModal" class="modal">
@@ -271,8 +185,6 @@
             </div>
           </div>
         </div>
-=======
->>>>>>> Stashed changes
         <h6 style="text-align: center">리뷰 목록</h6>
         <div class="reviewWrapper"></div>
         <iframe
@@ -336,29 +248,6 @@
       </div>
     </div>
     <!-- html 작성 끝 -->
-<<<<<<< Updated upstream
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
-      integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-    <script type="module" src="./js/components/search.js"></script>
-    <script src="./js/pages/user-profile.js"></script>
-    <script src="./js/components/chargeMoeny.js"></script>
-    <script>
-      const isLoggedIn = async () => {
-        const jsonData = await (
-          await fetch("http://localhost:3000/auth/me")
-        ).json();
-
-=======
     <script src="/socket.io/socket.io.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -380,28 +269,27 @@
           await fetch("http://localhost:3000/auth/me")
         ).json();
 
->>>>>>> Stashed changes
         if (jsonData.status === 200) {
           const { email, name, role } = jsonData.data;
           const topNavRight = document.querySelector(".top-nav-right");
           if (role === "PETSITTER") {
             topNavRight.innerHTML = `
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="petsitter-profile.html">${name}님</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" onClick="logout()" >로그아웃</a>
-            </li>
-          `;
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="petsitter-profile.html">${name}님</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" onClick="logout()" >로그아웃</a>
+                  </li>
+                `;
           } else {
             topNavRight.innerHTML = `
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="user-profile.html">${name}님</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" onClick="logout()" >로그아웃</a>
-            </li>
-          `;
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="user-profile.html">${name}님</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" onClick="logout()" >로그아웃</a>
+                  </li>
+                `;
           }
         }
       };
