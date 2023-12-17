@@ -1,11 +1,9 @@
 import response from "../lib/response";
-import customError from "../utils/customError";
 
 export const publicOnlyMiddleware = (req, res, next) => {
   if (!req.session.loggedIn) {
     return next();
   } else {
-    // 경고?
     return res.status(400).json(
       response({
         status: 400,

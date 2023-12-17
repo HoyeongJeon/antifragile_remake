@@ -70,6 +70,17 @@ export class AuthRepository {
     return user;
   };
 
+  petsitter_login = async (petsitterId) => {
+    await this.prisma.profiles.update({
+      where: {
+        PetsitterId: petsitterId
+      },
+      data: {
+        login: true
+      }
+    });
+  };
+
   findByEmail = async (email) => {
     const user = await this.prisma.users.findFirst({
       where: {
@@ -155,5 +166,15 @@ export class AuthRepository {
       }
     });
     return result;
+  };
+  logout = async () => {
+    await this.prisma.profiles.update({
+      where: {
+        login: true
+      },
+      data: {
+        login: false
+      }
+    });
   };
 }

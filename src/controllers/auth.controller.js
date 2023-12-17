@@ -43,7 +43,7 @@ export class AuthController {
         password,
         passwordCheck
       } = req.body;
-      const { path } = req.file;
+      const { location } = req.file;
       if (password.length < 6) {
         throw new customError(
           400,
@@ -58,7 +58,8 @@ export class AuthController {
           "비밀번호가 일치하지 않습니다."
         );
       }
-      const Emailcheck = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+      const Emailcheck =
+        /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-za-z0-9\\-]+/;
       if (Emailcheck.test(email) === false) {
         throw new customError(
           400,
@@ -74,7 +75,7 @@ export class AuthController {
         auth,
         introduce,
         password,
-        path
+        location
       );
 
       return res.status(responseFromService.status).json(responseFromService);
@@ -141,7 +142,7 @@ export class AuthController {
       next(error);
     }
   };
-  logout = (req, res, next) => {
+  logout = async (req, res, next) => {
     try {
       req.session.user = null;
       res.locals.loggedInUser = req.session.user;
@@ -201,5 +202,17 @@ export class AuthController {
     } catch (error) {
       next(error);
     }
+  };
+
+  kakao = async (req, res) => {
+    const baseURL = "https://kauth.kakao.com/oauth/authorize";
+    const config = {
+      client_id: process.env.KAKAO_CLIENT_ID,
+      redirect_uri: process.env.KAKAO_REDIRECT_URI,
+      response_type: "code"
+    };
+    const configURL = new URLSearchParams(config).toString();
+    const finalURL = `${baseURL}?${configURL}`;
+    return res.redirect(finalURL);
   };
 }
