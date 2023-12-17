@@ -6,8 +6,11 @@ const reservationUl = document.querySelector(".reservationUl");
 const walletInput = document.querySelector(".wallet");
 const reservationDate = document.querySelector(".reservationDate");
 const reviewWrapper = document.querySelector(".reviewWrapper");
-let userId = 0;
 
+let userId = 0;
+let petsitterId = 0;
+
+const modal = document.getElementById("myModal");
 const paintPage = (email, name, reservationInfo, wallet, Review) => {
   userName.innerText = name;
   walletInput.innerText = wallet;
@@ -52,6 +55,30 @@ const paintPage = (email, name, reservationInfo, wallet, Review) => {
           alert("예약 취소에 실패했습니다.");
         }
       });
+      const modalWrapper = document.querySelector(".modal-wrapper");
+      const postReviewBtn = document.createElement("button");
+      postReviewBtn.classList = "postReviewBtn";
+      postReviewBtn.textContent = "리뷰 작성";
+      postReviewBtn.addEventListener("click", (event) => {
+        console.log("here");
+        const today = new Date();
+        console.log("날짜", event.target.parentElement.children[1].innerHTML);
+        console.log(
+          new Date(event.target.parentElement.children[1].innerHTML) >= today
+        );
+        if (
+          new Date(event.target.parentElement.children[1].innerHTML) >= today
+        ) {
+          alert(
+            "펫시터 매칭 날짜보다 이전이기 때문에 리뷰를 작성할 수 없습니다."
+          );
+          return;
+        }
+        modal.style.display = "flex";
+        petsitterId = event.target.parentElement.dataset.PetsitterId;
+        console.log(event.target.parentElement);
+        console.log(petsitterId);
+      });
 
       li.innerHTML = `
         <span class="reservatedPetsitteName">${
@@ -64,6 +91,7 @@ const paintPage = (email, name, reservationInfo, wallet, Review) => {
       `;
 
       li.appendChild(deleteButton);
+      li.appendChild(postReviewBtn);
 
       // reservationId를 li의 dataset에 추가
       li.dataset.reservationId = reservation.reservationId;
@@ -98,6 +126,53 @@ const paintPage = (email, name, reservationInfo, wallet, Review) => {
   }
 };
 
+const openModalBtn = document.getElementById("openModalBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+// const modal = document.getElementById("myModal");
+
+// openModalBtn.addEventListener("click", () => {
+//   modal.style.display = "flex";
+// });
+
+closeModalBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+submitBtn.addEventListener("click", async () => {
+  const title = document.getElementById("postTitle").value;
+  const comment = document.getElementById("postComment").value;
+  const rating = document.getElementById("postReview").value;
+
+  const data = {
+    title,
+    comment,
+    rating,
+    petsitterId
+  };
+
+  const jsonData = await (
+    await fetch(
+      `http://localhost:3000/petsitters/profile/${petsitterId}/review`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+    )
+  ).json();
+
+  console.log("제목:", postTitle);
+  console.log("내용:", postComment);
+  console.log("별점:", postReview);
+
+  modal.style.display = "none";
+  window.location.reload();
+});
+
 const getUserInfo = async () => {
   const res = await fetch("/auth/me");
   const jsonData = await res.json();
@@ -105,7 +180,18 @@ const getUserInfo = async () => {
   const resposne = await (await fetch(`/auth/users`)).json();
 
   const { email, name, reservationInfo, wallet, Review } = resposne.data;
+  console.log(resposne.data);
   paintPage(email, name, reservationInfo, wallet, Review);
 };
 
 getUserInfo();
+
+// rating에서 실시간 range value 보여주기
+const postReviewInput = document.getElementById("postReview");
+const postReviewValue = document.getElementById("postReviewValue");
+const postReviewLabel = document.getElementById("postReviewLabel");
+
+postReviewInput.addEventListener("input", () => {
+  const currentValue = postReviewInput.value;
+  postReviewLabel.innerText = `별점: ${"⭐".repeat(currentValue)}`;
+});

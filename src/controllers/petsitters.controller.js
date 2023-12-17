@@ -44,6 +44,19 @@ export class PetsittersController {
       next(error);
     }
   };
+
+  getReviews = async (req, res, next) => {
+    try {
+      const { petsitterId } = req.params;
+      const getReview = await this.petsittersService.getReviews(petsitterId);
+
+      return res.status(getReview.status).json(getReview);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
   postReviews = async (req, res, next) => {
     try {
       const { userId } = req.session.loggedInUser;

@@ -143,6 +143,16 @@ export class PetsittersRepository {
     }
     return petsitters;
   };
+
+  getAllReviews = async (petsitterId, userId) => {
+    console.log("here");
+    console.log(petsitterId);
+    const getReview = await this.prisma.review.findMany({
+      where: { PetsitterId: +petsitterId }
+    });
+
+    return getReview;
+  };
   postReviews = async (userId, petsitterId, title, comment, rating) => {
     const createdReviews = await this.prisma.review.create({
       data: {
