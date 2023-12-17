@@ -84,7 +84,7 @@ const getReviews = async () => {
     await fetch(`http://localhost:3000/petsitters/${sitterId}`)
   ).json();
   const review = jsonData.data.Review;
-  console.log(jsonData);
+  console.log("리뷰", jsonData);
   review.forEach((el) => {
     const reservationDiv = document.createElement("div");
 
@@ -93,8 +93,9 @@ const getReviews = async () => {
     reservationDiv.innerHTML = `
           <div class="review-info">
           <p class="sitter-title">${el.title}</p>
-          <p class="sitter-rating">${el.comment}</p>
+          <p class="sitter-name">${el.name}</p>
           <p class="sitter-review">${"⭐".repeat(el.rating)}</p>
+          <p class="sitter-rating">${el.comment}</p>
 
           </div>
       `;
