@@ -84,12 +84,12 @@ const getReviews = async () => {
     await fetch(`http://localhost:3000/petsitters/${sitterId}`)
   ).json();
   const review = jsonData.data.Review;
-
+  console.log(jsonData);
   review.forEach((el) => {
     const reservationDiv = document.createElement("div");
 
     reservationDiv.classList.add("sitter");
-    console.log("el.title", el.title);
+    console.log(el);
     reservationDiv.innerHTML = `
           <div class="review-info">
           <p class="sitter-title">${el.title}</p>

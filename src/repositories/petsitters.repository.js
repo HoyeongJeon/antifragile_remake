@@ -39,6 +39,7 @@ export class PetsittersRepository {
         delete petsitters[i].Review;
       }
     }
+    console.log(petsitters);
     return petsitters;
   };
   getPetsitterById = async (petsitterId) => {
@@ -56,6 +57,7 @@ export class PetsittersRepository {
         },
         Review: {
           select: {
+            UserId: true,
             title: true,
             comment: true,
             rating: true
@@ -66,6 +68,7 @@ export class PetsittersRepository {
         petsitterId: +petsitterId
       }
     });
+
     if (petsitter) {
       const reviews = petsitter.Review;
       let totalRating = 0;
@@ -77,7 +80,24 @@ export class PetsittersRepository {
         avgRating = totalRating / reviews.length;
       }
       petsitter.avgRating = avgRating;
-      return petsitter;
+    }
+    const petsitterInfo = [];
+    for (let i = 0; i < petsitter.Review.length; i++) {
+      const userInfo = await this.prisma.users.findFirst({
+        select: {
+          name: true
+        },
+        where: {
+          userId: petsitter.Review[i].UserId
+        }
+      });
+      petsitterInfo.push({
+        ...petsitter.Review[i],
+        name: userInfo.name
+      });
+    }
+    for (let i = 0; i < petsitter.Review.length; i++) {
+      petsitter.Review[i] = petsitterInfo[i];
     }
     delete petsitter.password;
     return petsitter;
