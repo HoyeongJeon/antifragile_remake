@@ -69,6 +69,7 @@
         text-align: center;
         padding-top: 50px;
       }
+<<<<<<< Updated upstream
       /* 모달 스타일 */
       .modal {
         display: none;
@@ -147,6 +148,16 @@
     </style>
   </head>
 
+=======
+
+      .list-group-item button {
+        border: none;
+        background-color: white;
+      }
+    </style>
+  </head>
+
+>>>>>>> Stashed changes
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
@@ -220,7 +231,11 @@
       </h4>
       <div class="wrapper">
         <div class="reservation-wrapper">
+<<<<<<< Updated upstream
           <h6 style="text-align: center"></h6>
+=======
+          <h6 style="text-align: center">예약 목록</h6>
+>>>>>>> Stashed changes
           <div class="card" style="width: 20rem">
             <ul class="list-group list-group-flush reservationUl"></ul>
           </div>
@@ -230,6 +245,7 @@
           <hr />
         </div>
 
+<<<<<<< Updated upstream
         <div class="modal-wrapper">
           <!-- 모달 영역 -->
           <div id="myModal" class="modal">
@@ -255,6 +271,8 @@
             </div>
           </div>
         </div>
+=======
+>>>>>>> Stashed changes
         <h6 style="text-align: center">리뷰 목록</h6>
         <div class="reviewWrapper"></div>
         <iframe
@@ -318,6 +336,7 @@
       </div>
     </div>
     <!-- html 작성 끝 -->
+<<<<<<< Updated upstream
 
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -339,6 +358,29 @@
           await fetch("http://localhost:3000/auth/me")
         ).json();
 
+=======
+    <script src="/socket.io/socket.io.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script type="module" src="./js/components/search.js"></script>
+    <script src="./js/pages/user-profile.js"></script>
+    <script src="./js/components/chargeMoeny.js"></script>
+    <script>
+      const isLoggedIn = async () => {
+        const jsonData = await (
+          await fetch("http://localhost:3000/auth/me")
+        ).json();
+
+>>>>>>> Stashed changes
         if (jsonData.status === 200) {
           const { email, name, role } = jsonData.data;
           const topNavRight = document.querySelector(".top-nav-right");

@@ -24,7 +24,6 @@ export class ReservationController {
 
       const formattedReservationDate = new Date(reservationDate);
 
-      console.log(formattedReservationDate);
       const responseFromService = await this.reservationService.postReservation(
         sitterId,
         formattedReservationDate,

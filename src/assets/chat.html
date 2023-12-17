@@ -1,4 +1,4 @@
-<!-- <!doctype html> -->
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,13 +10,7 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/calendar.css" />
     <style>
-      .top-nav-left {
-        margin-left: auto;
-        margin-right: 0;
-      }
-
       .top-nav-left {
         margin-left: auto;
         margin-right: 0;
@@ -32,6 +26,17 @@
         width: 100%;
         height: 100vh;
       }
+
+      .sitters-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 200px;
+      }
+
       .card {
         margin: 10px;
       }
@@ -55,112 +60,8 @@
         text-align: center;
         padding-top: 50px;
       }
-
-      #container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .sitter-info {
-        height: 1000px;
-        text-align: center;
-        border: 1px solid #e5e5e5;
-        border-radius: 8px;
-        padding: 50 20 20 20;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin: 50px;
-      }
-      .review-info {
-        height: 200px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #e5e5e5;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin: 20px;
-      }
-      .calendar-yearmonth__btn {
-        background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Ficon-icons.com%2Fko%2F%25EC%2595%2584%25EC%259D%25B4%25EC%25BD%2598%2F%25EC%2598%25A4%25EB%25A5%25B8%25EC%25AA%25BD-%25ED%2599%2594%25EC%2582%25B4%25ED%2591%259C-%25EC%2595%2588%25EB%2582%25B4%25EC%259E%25A5-%25EC%2584%25A4%25EB%25AA%2585-%25EB%25B2%2584%25ED%258A%25BC%2F73175&psig=AOvVaw3aY9h5b64itoAupKCm3l6p&ust=1702714403505000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOi91cv_kIMDFQAAAAAdAAAAABAD);
-        background-size: cover;
-        background-color: green;
-        border-radius: 0;
-      }
-      .calendar {
-        height: 700px;
-        width: 700px;
-        border: 1px solid #e5e5e5;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin: 0;
-      }
-      .calendar1 {
-        height: 800px;
-      }
-      .sitters-container {
-        width: 100%;
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        padding-bottom: 200px;
-      }
-
-      .card {
-        margin: 10px;
-      }
-
-      .petsitter-info {
-        height: 1300px;
-        margin-left: 100px;
-      }
-
-      .detail-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-right: 100px;
-      }
-
-      .reservation,
-      .review {
-        width: 100%;
-        padding: 20px;
-        box-sizing: border-box;
-        height: 400px;
-        margin-top: 30px;
-      }
-
-      .calendar {
-        height: 400px;
-        width: 100%; /* 조정 */
-        max-width: 500px; /* 조정 */
-        margin: 0 auto; /* 중앙 정렬 */
-        /* 추가적으로 필요한 스타일링을 여기에 추가 */
-      }
-      .calendar-reservation {
-        padding-top: 15px;
-        text-align: center;
-        font-weight: bold;
-      }
-      .sitter-name {
-        margin-top: 30px;
-      }
-      .sitter-email {
-        margin: 10px;
-      }
-      .sitter-career {
-        margin: 10px;
-      }
-      .sitter-avgRating {
-        margin: 10px;
-      }
     </style>
+    <link rel="stylesheet" href="./css/signup.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -180,9 +81,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mb-2 mb-lg-0 top-nav-left">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="petsitter-list.html"
-                >펫시터</a
-              >
+              <a class="nav-link" aria-current="page" href="#">펫시터</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="reservation.html">예약하기</a>
@@ -218,45 +117,43 @@
       </div>
     </nav>
     <!-- html 작성 시작 -->
-    <div id="container">
-      <div class="petsitter-info">
-        <button>hi</button>
-      </div>
-      <div class="detail-info">
-        <div class="reservation">
-          <div class="calendar1">
-            <!-- calendar -->
-            <div class="calendar">
-              <p class="calendar-reservation">예약 가능 일자</p>
-              <!-- 연도, 월 -->
-              <nav class="calendar-yearmonth">
-                <div class="calendar-yearmonth__btn">
-                  <i class="fa-solid fa-arrow-left"></i>
-                </div>
-                <div class="calendar-yearmonth__col"></div>
-                <div class="calendar-yearmonth__btn">
-                  <i class="fa-solid fa-arrow-right"></i>
-                </div>
-              </nav>
-              <!-- 요일 -->
-              <div class="calendar-days">
-                <div class="calendar-day"><span>S</span></div>
-                <div class="calendar-day"><span>M</span></div>
-                <div class="calendar-day"><span>T</span></div>
-                <div class="calendar-day"><span>W</span></div>
-                <div class="calendar-day"><span>T</span></div>
-                <div class="calendar-day"><span>F</span></div>
-                <div class="calendar-day"><span>S</span></div>
-              </div>
-              <!-- 일자 -->
-              <div class="calendar-date"></div>
-            </div>
-          </div>
+    <header>
+      채팅방
+      <span class="roomCntWrapper" style="font-size: 20px"
+        >(현재 인원 수 :
+        <span class="roomCnt" style="font-size: 20px">0</span>)</span
+      >
+    </header>
+    <form class="signup-form chatting-form">
+      <label for="chat">
+        <div>
+          <input
+            name="chat"
+            class="signup-input"
+            type="text"
+            placeholder="채팅을 입력해주세요"
+            id="chat"
+          />
         </div>
-        <div class="review"></div>
-      </div>
-    </div>
+      </label>
+      <button class="signup-button">보내기</button>
+    </form>
+    <form class="signup-form nickname-form">
+      <label for="nickname">
+        <div>
+          <input
+            name="nickname"
+            class="signup-input"
+            type="text"
+            placeholder="닉네임을 입력해주세요"
+            id="nickname"
+          />
+        </div>
+      </label>
+      <button class="signup-button nickname-button">닉네임 설정</button>
+    </form>
     <!-- html 작성 끝 -->
+
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -268,15 +165,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./js/petsitters/calendar.js"></script>
-    <script src="./js/petsitters/petsitter-detail.js"></script>
+    <script src="./js/petsitters/getSitters.js"></script>
     <script type="module" src="./js/components/search.js"></script>
+    <script type="module" src="./js/components/chat.js"></script>
     <script>
       const isLoggedIn = async () => {
         const jsonData = await (

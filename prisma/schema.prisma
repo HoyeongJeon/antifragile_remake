@@ -15,6 +15,7 @@ enum Role {
   USER
 }
 
+
 model Users { 
   userId Int @id @default(autoincrement()) @map("userId")
   email String @unique @map("email")
@@ -22,6 +23,7 @@ model Users {
   password String? @map("password")
   role Role @default(USER) @map("role")
   wallet Int @default(10000) @map("wallet")
+  social Boolean @default(false) @map("social")
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
 
@@ -32,7 +34,7 @@ model Users {
 }
 
 model PetSitters {
-  petsitterId Int @id @default(autoincrement()) @map("petsitterId")
+  petsitterId Int @id @default(autoincrement())@map("petsitterId")
   email String @unique @map("email")
   name String @map("name")
   password String? @map("password")
@@ -55,6 +57,7 @@ model Profiles {
   career String @map("career") @db.Text
   tags String? @map("tags")
   price Int? @map("price")
+  login Boolean @default(false) @map("login")
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
 
@@ -62,6 +65,7 @@ model Profiles {
 
   @@map("Profiles")
 }
+
 
 
 model Review {

@@ -9,7 +9,7 @@ POST {{host}}/1  HTTP/1.1
 Content-Type: application/json
 
 {
-  "reservationDate":"2023-12-27T00:00:00Z",
+  "reservationDate":"2023-12-10T00:00:00Z",
   "money":"10000"
 }
 

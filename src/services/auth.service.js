@@ -19,7 +19,6 @@ export class AuthService {
     }
 
     const getValue = await getAsync(email);
-    console.log(getValue);
     if (getValue !== auth) {
       throw new customError(
         400,
@@ -135,6 +134,7 @@ export class AuthService {
     }
 
     delete duplicatedId.password;
+    await this.authRepository.petsitter_login(duplicatedId.petsitterId);
     return response({
       status: 200,
       message: "로그인에 성공했습니다.",
@@ -214,5 +214,8 @@ export class AuthService {
       message: "이메일 전송에 성공했습니다.",
       data: authNum
     });
+  };
+  logout = async () => {
+    await this.authRepository.logout();
   };
 }

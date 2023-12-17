@@ -48,13 +48,6 @@ export class ReservationRepository {
       return false;
     }
 
-    // const reservation = await this.prisma.reservation.create({
-    //   data: {
-    //     PetsitterId: +sitterId,
-    //     UserId: userId,
-    //     reservationDate
-    //   }
-    // });
     const [reservation, moneyUpdate] = await this.prisma.$transaction(
       async (tx) => {
         const reservation = await this.prisma.reservation.create({
