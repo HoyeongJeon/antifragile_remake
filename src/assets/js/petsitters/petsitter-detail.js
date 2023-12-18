@@ -50,6 +50,20 @@ const getReservation = async () => {
 
   const reservation = jsonData.data;
 
+  $calendarDateCol.forEach((v) => {
+    const todayWithTime = new Date();
+    const today = String(todayWithTime)
+      .split("")
+      .slice(8, 10)
+      .reduce((prev, curr) => prev + curr, "");
+    console.log("here");
+    console.log("today", today);
+    console.log("v.innerHTML", v.innerHTML === "");
+    if (+v.innerHTML < +today && v.innerHTML) {
+      v.style.backgroundColor = "ff8585";
+    }
+  });
+
   // 예약불가능한 날짜(이미 예약이 차있는 날짜)에는 달력에 색 표시
   reservation.forEach((el) => {
     $calendarDateCol.forEach((v) => {
@@ -64,19 +78,6 @@ const getReservation = async () => {
   });
   console.log("hi");
   //현재 날짜 이전 날짜에는 달력에 색 표시
-  $calendarDateCol.forEach((v) => {
-    const todayWithTime = new Date();
-    const today = String(todayWithTime)
-      .split("")
-      .slice(8, 10)
-      .reduce((prev, curr) => prev + curr, "");
-    console.log("here");
-    console.log("today", today);
-    console.log("v.innerHTML", v.innerHTML === "");
-    if (+v.innerHTML < +today && v.innerHTML) {
-      v.style.backgroundColor = "ff8585";
-    }
-  });
 };
 document.addEventListener("DOMContentLoaded", getReservation);
 // getReservation();
