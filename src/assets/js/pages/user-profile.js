@@ -54,25 +54,38 @@ const paintPage = (email, name, reservationInfo, wallet, Review) => {
       postReviewBtn.classList = "postReviewBtn";
       postReviewBtn.textContent = "리뷰 작성";
       postReviewBtn.addEventListener("click", (event) => {
-        console.log("here");
-        const today = new Date();
-        console.log("날짜", event.target.parentElement.children[1].innerHTML);
-        console.log(
-          new Date(event.target.parentElement.children[1].innerHTML) >= today
-        );
-        if (
-          new Date(event.target.parentElement.children[1].innerHTML) >= today
-        ) {
-          alert(
-            "펫시터 매칭 날짜보다 이전이기 때문에 리뷰를 작성할 수 없습니다."
-          );
-          return;
-        }
+        // console.log("here");
+        // const today = new Date();
+        // console.log("날짜", event.target.parentElement.children[1].innerHTML);
+        // console.log(
+        //   new Date(event.target.parentElement.children[1].innerHTML) >= today
+        // );
+
+        // if (
+        //   new Date(event.target.parentElement.children[1].innerHTML) >= today
+        // ) {
+        //   // alert(
+        //   //   "펫시터 매칭 날짜보다 이전이기 때문에 리뷰를 작성할 수 없습니다."
+        //   // );
+        //   // return;
+        //   postReviewBtn.style.display = "none";
+        // }
         modal.style.display = "flex";
         petsitterId = event.target.parentElement.dataset.PetsitterId;
         console.log(event.target.parentElement);
         console.log(petsitterId);
       });
+
+      // const listGroup = document.querySelectorAll(".list-group-item");
+      // console.log("야야야ㅑ");
+      // console.log(listGroup);
+      // listGroup.forEach((list) => {
+      //   const today = new Date();
+      //   if (new Date(list.children[1].innerHTML) >= today) {
+      //     console.log("여기");
+      //     postReviewBtn.style.display = "none";
+      //   }
+      // });
 
       li.innerHTML = `
         <span class="reservatedPetsitteName">${
@@ -95,6 +108,20 @@ const paintPage = (email, name, reservationInfo, wallet, Review) => {
     });
   }
   console.log("리뷰", Review);
+  const listGroup = document.querySelectorAll(".list-group-item");
+  console.log("야야야ㅑ");
+  console.log(listGroup);
+  listGroup.forEach((list) => {
+    const today = new Date();
+    if (new Date(list.children[1].innerHTML) >= today) {
+      console.log("여기");
+      const postReviewBtn2 = document.querySelectorAll(".postReviewBtn");
+      postReviewBtn2.forEach((v) => {
+        v.style.display = "none";
+      });
+      // postReviewBtn2.style.display = "none";
+    }
+  });
 
   console.log(Review.length);
   if (Review.length === 0) {
