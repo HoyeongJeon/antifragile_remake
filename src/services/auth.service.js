@@ -57,7 +57,6 @@ export class AuthService {
     }
 
     const getValue = await getAsync(email);
-    console.log(getValue);
     if (getValue !== auth) {
       throw new customError(
         400,
@@ -202,8 +201,6 @@ export class AuthService {
         );
       }
 
-      console.log("Message sent successfully!");
-      // only needed when using pooled connections
       transporter.close();
     });
     await redisClient.set(email, authNum);

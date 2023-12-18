@@ -269,25 +269,15 @@
         let selectedId = "";
 
         function handleSelectChange() {
-          // Get the selected option
           let selectedOption =
             petSitterSelect.options[petSitterSelect.selectedIndex];
-          // Retrieve values from the selected option
           selectedValue = selectedOption.value;
           selectedPrice = selectedOption.dataset.price;
           selectedId = selectedOption.dataset.sitterId;
-
-          // Log or perform desired actions with the values
-          console.log(
-            "선택된 값: " + selectedValue + " " + selectedPrice + "원"
-          );
         }
         let selectedDate = "";
         function handleSelectDate() {
-          // Get the selected date value
           selectedDate = date.value;
-
-          // Log or perform desired actions with the selected date
         }
 
         const signupBtn = document.querySelector(".signup-button");
@@ -306,7 +296,6 @@
 
         const money = await getUserInfo();
 
-        // Add event listener to the select element
         signupBtn.addEventListener("click", async (e) => {
           e.preventDefault();
 

@@ -203,15 +203,19 @@ export class AuthController {
     }
   };
 
-  kakao = async (req, res) => {
-    const baseURL = "https://kauth.kakao.com/oauth/authorize";
-    const config = {
-      client_id: process.env.KAKAO_CLIENT_ID,
-      redirect_uri: process.env.KAKAO_REDIRECT_URI,
-      response_type: "code"
-    };
-    const configURL = new URLSearchParams(config).toString();
-    const finalURL = `${baseURL}?${configURL}`;
-    return res.redirect(finalURL);
+  kakao = async (req, res, next) => {
+    try {
+      const baseURL = "https://kauth.kakao.com/oauth/authorize";
+      const config = {
+        client_id: process.env.KAKAO_CLIENT_ID,
+        redirect_uri: process.env.KAKAO_REDIRECT_URI,
+        response_type: "code"
+      };
+      const configURL = new URLSearchParams(config).toString();
+      const finalURL = `${baseURL}?${configURL}`;
+      return res.redirect(finalURL);
+    } catch (error) {
+      next(error);
+    }
   };
 }
