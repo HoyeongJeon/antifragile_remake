@@ -39,7 +39,6 @@ export class PetsittersRepository {
         delete petsitters[i].Review;
       }
     }
-    console.log(petsitters);
     return petsitters;
   };
   getPetsitterById = async (petsitterId) => {
@@ -165,8 +164,6 @@ export class PetsittersRepository {
   };
 
   getAllReviews = async (petsitterId, userId) => {
-    console.log("here");
-    console.log(petsitterId);
     const getReview = await this.prisma.review.findMany({
       where: { PetsitterId: +petsitterId }
     });

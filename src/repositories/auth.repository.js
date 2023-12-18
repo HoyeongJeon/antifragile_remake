@@ -147,7 +147,6 @@ export class AuthRepository {
       );
     });
 
-    console.log(reservationInfo);
     delete myInfo.password;
     delete myInfo.Reservation;
     myInfo.reservationInfo = reservationInfo;

@@ -19,7 +19,6 @@ export class ReservationRepository {
   };
 
   postReservation = async (sitterId, reservationDate, userId, money) => {
-    // sitter id와 날짜 두 개를 db에서 동시에 찾는 방법 구해보기
     const price = await this.prisma.profiles.findFirst({
       where: { PetsitterId: +sitterId }
     });
@@ -81,17 +80,13 @@ export class ReservationRepository {
     const myReservedDate = await this.prisma.reservation.findFirst({
       where: { reservationId: +reservationId }
     });
-    console.log("myReservedDate", myReservedDate);
 
     // 예약된 내역이 없을 경우 false 반환
     if (!myReservedDate) {
-      console.log("여기");
       return false;
     }
 
     if (myReservedDate.UserId !== userId) {
-      console.log("myReservedDate.UserId", myReservedDate.UserId);
-      console.log("userId", userId);
       return {
         success: false,
         status: 403,
@@ -100,15 +95,6 @@ export class ReservationRepository {
       };
     }
 
-    // 이미 정해진 날짜가 있을 경우 false 반환
-    console.log("wantToChangeDate", typeof wantToChangeDate);
-    //여기서 왜 날짜가 다른애가 나오지..
-    // const reservedDate = await this.prisma.reservation.findFirst({
-    //   where: {
-    //     PetsitterId: +sitterId,
-    //     reservationDate: new Date(wantToChangeDate)
-    //   }
-    // });
     const reservedDate = await this.prisma.reservation.findMany({
       where: { PetsitterId: +sitterId }
     });
@@ -120,16 +106,6 @@ export class ReservationRepository {
     if (existReservedDate) {
       return false;
     }
-
-    // console.log(
-    //   "reservedDate.reservationDate 타입",
-    //   typeof reservedDate.reservationDate
-    // );
-    // console.log("reservedDate", reservedDate);
-    // if (reservedDate) {
-    //   console.log("저기");
-    //   return false;
-    // }
 
     const updatedReservation = await this.prisma.reservation.update({
       where: { reservationId: +reservationId },

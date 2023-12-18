@@ -32,7 +32,6 @@ export class AuthController {
 
   petsitter_signup = async (req, res, next) => {
     try {
-      // console.log(req.body);
       const {
         email,
         name,

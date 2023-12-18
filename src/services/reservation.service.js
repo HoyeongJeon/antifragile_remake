@@ -1,4 +1,3 @@
-import { CustomCondition } from "express-validator/src/context-items/custom-condition.js";
 import response from "../lib/response.js";
 import { customError } from "../utils/customError/index.js";
 
