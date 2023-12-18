@@ -115,6 +115,15 @@ function prevMonthDraw() {
 
   init.date = new Date(thisYear, thisMonth - 1, 1);
   init.drawCalendar();
+
+  const $calendarDateCol = document.querySelectorAll(".calendar-date__col");
+
+  $calendarDateCol.forEach((v) => {
+    console.log(v);
+    if (v.innerHTML !== "") {
+      v.style.backgroundColor = "ff8585";
+    }
+  });
 }
 
 function nextMonthDraw() {
