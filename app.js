@@ -19,8 +19,6 @@ import { SECRET_KEY } from "./src/constants/security.constant.js";
 import logMiddleware from "./src/middlewares/log.middleware.js";
 import localsMiddleware from "./src/middlewares/locals.middleware.js";
 import errorHandlingMiddleware from "./src/middlewares/error-handling.middleware.js";
-import passport from "passport";
-import passportConfig from "./src/passport";
 import helmet from "helmet";
 import hpp from "hpp";
 import router from "./src/routes/index.js";
@@ -29,7 +27,6 @@ const app = express();
 const PORT = SERVER_PORT || 3000;
 const __dirname = path.resolve();
 const MySQLStore = expressMySQLSession(session);
-passportConfig();
 
 const sessionStore = new MySQLStore({
   user: MYSQL_USERNAME,
@@ -69,9 +66,6 @@ app.use(
     }
   })
 );
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(logMiddleware);
 app.use(cookieParser());
